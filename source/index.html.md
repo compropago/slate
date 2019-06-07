@@ -8,8 +8,8 @@ language_tabs: # must be one of https://git.io/vQNgJ
   - javascript
 
 toc_footers:
-  - <a href='#'>Sign Up for a Developer Key</a>
-  - <a href='https://github.com/lord/slate'>Documentation Powered by Slate</a>
+#  - <a href='#'>Sign Up for a Developer Key</a>
+#  - <a href='https://github.com/lord/slate'>Documentation Powered by Slate</a>
 
 includes:
   - errors
@@ -17,57 +17,39 @@ includes:
 search: true
 ---
 
-# Introduction
+# Introducción
 
-Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.
+ComproPago te ofrece un API tipo REST para integrar pagos en SPEI en tu comercio electrónico o tus aplicaciones.
 
-We have language bindings in Shell, Ruby, Python, and JavaScript! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
+La autenticación es vía HTTP por medio de llaves -API Keys- tanto en modo de pruebas como en modo activo. El API cuenta con métodos para accesar a los diferentes recursos -API Endpoints- los cuales actualmente te permiten realizar diversas operaciones, desde generar órdenes de pago hasta enviar instrucciones de pago vía SMS.
 
-This example API documentation page was created with [Slate](https://github.com/lord/slate). Feel free to edit it and use it as a base for your own API's documentation.
-
-# Authentication
+# Autenticación
 
 > To authorize, use this code:
 
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-```
 
 ```shell
-# With shell, you can just pass the correct header with each request
 curl "api_endpoint_here"
-  -H "Authorization: meowmeowmeow"
+  -u sk_live_xxxxxxxxxxxxxx:pk_live_xxxxxxxxxxxxxxx
 ```
 
-```javascript
-const kittn = require('kittn');
+> Asegurate de remplazar `sk_live_xxxxxxxxxxxxxx:pk_live_xxxxxxxxxxxxxxx` tus llaves del API.
 
-let api = kittn.authorize('meowmeowmeow');
-```
+Ponemos a tu disposición dos pares de llaves -API Keys- en la sección [panel/configuración](https://panel.compropago.com/panel/configuracion), con ellas puedes interactuar con nuestro sistema en sus diferentes modos de operación.
 
-> Make sure to replace `meowmeowmeow` with your API key.
+Es posible utilizar más de una llave al mismo tiempo; es decir, puedes realizar cargos en modo activo o producción y al mismo tiempo tu equipo de desarrollo puede hacer cargos de prueba sin afectar la configuración de tu aplicación.
 
-Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our [developer portal](http://example.com/developers).
+La autenticación de tu aplicación con ComproPago es por medio de HTTP Basic Authentication: proporciona alguna de tus llaves como username, no necesitas proporcionar un password.
 
-Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:
-
-`Authorization: meowmeowmeow`
+`sk_live_xxxxxxxxxxxxxx:pk_live_xxxxxxxxxxxxxxx`
 
 <aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
+Debes remplazar <code>sk_live_xxxxxxxxxxxxxx:pk_live_xxxxxxxxxxxxxxx</code> con tus llaves del API.
 </aside>
 
-# Kittens
+# SPEI
 
-## Get All Kittens
+## Crear orden de pago
 
 ```ruby
 require 'kittn'
@@ -98,142 +80,255 @@ let kittens = api.kittens.get();
 > The above command returns JSON structured like this:
 
 ```json
-[
-  {
-    "id": 1,
-    "name": "Fluffums",
-    "breed": "calico",
-    "fluffiness": 6,
-    "cuteness": 7
-  },
-  {
-    "id": 2,
-    "name": "Max",
-    "breed": "unknown",
-    "fluffiness": 5,
-    "cuteness": 10
-  }
-]
+{
+    "object": "orders.create",
+    "code": 200,
+    "status": "success",
+    "message": "success.create",
+    "request": 1559853010380,
+    "url": "/v2/orders",
+    "map": "76ab15b2-f7c3-4a95-a662-b5cc4a2a9938",
+    "data": {
+        "id": "ch_ca001318-7f70-47a9-90a2-df3e755d9be3",
+        "shortId": "481AD8F9",
+        "product": {
+            "id": "SMGCURL1",
+            "price": 150,
+            "name": "SAMSUNG GOLD CURL",
+            "currency": "MXN",
+            "url": "http://dummyurl.com/smgcul1.jpg"
+        },
+        "customer": {
+            "name": "Waldix",
+            "email": "waldix@compropago.com",
+            "phone": "5513899832"
+        },
+        "payment": {
+            "type": "SPEI",
+            "fee": 10.25,
+            "iva": 1.64,
+            "clabe": "646180146400219781",
+            "instructions": [
+                {
+                    "step": 1,
+                    "description": "Agrega la cuenta CLABE en tu banca en linea para banco STP."
+                },
+                {
+                    "step": 2,
+                    "description": "Una vez dada de alta la cuenta CLABE, realiza el deposito por la cantidad exacta."
+                },
+                {
+                    "step": 3,
+                    "description": "Ya que realizaste el pago, recibiras un comprobante de transacción exitosa y nuestro sistema confirmara automáticamente el pago."
+                }
+            ]
+        },
+        "status": "PENDING",
+        "testMode": false,
+        "exchange": {
+            "rate": 1,
+            "finalAmount": 150,
+            "originAmount": 150,
+            "finalCurrency": "MXN",
+            "originCurrency": "MXN"
+        },
+        "extras": {},
+        "client": {
+            "name": "ms-api",
+            "version": "2.0.0"
+        },
+        "createdAt": 1559853010,
+        "updatedAt": 1559853010,
+        "expiresAt": 1560139200
+    }
+}
 ```
 
-This endpoint retrieves all kittens.
+Generación de orden de pago para SPEI. 
+Nota. Si envias un id en el objeto customer, siempre que envies este identificador te regresaremos la misma cuenta CLABE con la finalidad de que el cliente no tenga que estar dando de alta varias cuentas en su banca en linea.
 
 ### HTTP Request
 
-`GET http://example.com/api/kittens`
+`POST https://api.compropago.com/v2/orders`
 
 ### Query Parameters
 
-Parameter | Default | Description
---------- | ------- | -----------
-include_cats | false | If set to true, the result will also include cats.
-available | true | If set to false, the result will include kittens that have already been adopted.
+Parameter | Type | Description
+--------- | ---- | -----------
+product | Object | Requerido. Objeto del producto a pagar
+id | string | Requerido. Identificador del producto o servicio
+price | float | Requerido. Precio del producto o servicio
+name | string | Requerido. Nombre del producto o servicio
+url | string | Opcional. Url de la imagen del producto o servicio
+customer | Object | Requerido. Objeto del cliente.
+id | string | Requerido. Id del cliente.
+name | string | Requerido. Nombre del cliente
+email | string | Requerido. Email del cliente
+phone | string | Opcional. Teléfono del cliente
+payment | Object | Requerido. Objeto del pago
+type | string | Requerido. 	Tipo de pago *default "SPEI"
 
-<aside class="success">
+<!-- <aside class="success">
 Remember — a happy kitten is an authenticated kitten!
-</aside>
+</aside> -->
 
-## Get a Specific Kitten
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get(2)
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get(2)
-```
+## Verificar orden de pago
 
 ```shell
-curl "http://example.com/api/kittens/2"
-  -H "Authorization: meowmeowmeow"
+curl "https://api.compropago.com/v2/orders/ch_c1c0983d-6318-4f65-838c-8ff60afacf18"
+  -u sk_live:pk_live
 ```
 
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let max = api.kittens.get(2);
-```
-
-> The above command returns JSON structured like this:
+> El comando anterior regresa el JSON estructurado de la siguiente manera:
 
 ```json
 {
-  "id": 2,
-  "name": "Max",
-  "breed": "unknown",
-  "fluffiness": 5,
-  "cuteness": 10
-}
+      "id": "ch_c1c0983d-6318-4f65-838c-8ff60afacf18",
+      "shortId": "3B92A8FC",
+      "product": {
+          "id": "SMGCURL1",
+          "price": 12.56,
+          "name": "SAMSUNG GOLD CURL",
+          "currency": "MXN"
+      },
+      "customer": {
+          "name": "Ernesto Perez",
+          "email": "luis_mtzg@msn.com"
+      },
+      "payment": {
+          "type": "SPEI",
+          "fee": 8.19,
+          "iva": 1.31,
+          "clabe": "000000000000000000",
+          "instructions": [
+              {
+                  "step": 1,
+                  "description": "Agrega la cuenta CLABE en tu banca en linea para banco STP."
+              },
+              {
+                  "step": 2,
+                  "description": "Una vez dada de alta la cuenta CLABE, realiza el deposito por la cantidad exacta."
+              },
+              {
+                  "step": 3,
+                  "description": "Ya que realizaste el pago, recibiras un comprobante de transacción exitosa y nuestro sistema confirmara automáticamente el pago."
+              }
+          ]
+      },
+      "status": "PENDING",
+      "testMode": false,
+      "exchange": {
+          "rate": 1,
+          "finalAmount": 12.56,
+          "originAmount": 12.56,
+          "finalCurrency": "MXN",
+          "originCurrency": "MXN"
+      },
+      "extras": {},
+      "api": {
+          "name": "ms-api",
+          "version": "2.0.0"
+      },
+      "createdAt": 1522082069321,
+      "updatedAt": 1522082069321,
+      "expiresAt": 1522254869321
+  }
 ```
 
-This endpoint retrieves a specific kitten.
+Verifica y obtiene los detalles de una orden existente.
 
-<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
+<!-- <aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside> -->
 
 ### HTTP Request
 
-`GET http://example.com/kittens/<ID>`
+`GET https://api.compropago.com/v2/orders/<ID>`
 
 ### URL Parameters
 
-Parameter | Description
---------- | -----------
-ID | The ID of the kitten to retrieve
+Parameter | Type | Description
+--------- | ---- | -----------
+ID | string | Requerido. Id de la orden de pago generada.
 
-## Delete a Specific Kitten
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.delete(2)
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.delete(2)
-```
+## Crear cuenta CLABE
 
 ```shell
-curl "http://example.com/api/kittens/2"
-  -X DELETE
-  -H "Authorization: meowmeowmeow"
+curl "https://api.compropago.com/v2/createClabe"
+-u sk_live:pk_live \
+-X POST \
+-d '{
+      "customer":{
+		    "id": "1",
+		    "email": "customer@email.com",
+		    "phone": "5555555555"
+	    },
+	    "payment":{
+		    "frecuency": "unlimited",
+		    "exp_date": null,
+		    "amount": null
+	    }
+    }' 
 ```
 
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let max = api.kittens.delete(2);
-```
-
-> The above command returns JSON structured like this:
+> El comando anterior regresa el JSON estructurado de la siguiente manera:
 
 ```json
 {
-  "id": 2,
-  "deleted" : ":("
+    "object": "orders.createClabe",
+    "code": 200,
+    "status": "success",
+    "message": "success.create",
+    "request": 1559855232441,
+    "url": "/v2/createClabe",
+    "map": "dd91e4b5-4a3f-472e-a3bb-4d53f52902f6",
+    "data": {
+        "customer": {
+            "id": "1",
+            "email": "customer@email.com",
+            "phone": "5555555555"
+        },
+        "payment": {
+            "clabe": "000000000000000000",
+            "frecuency": "unlimited",
+            "amount": null,
+            "instructions": [
+                {
+                    "step": 1,
+                    "description": "Agrégala en tu banca en línea seleccionando como banco: STP."
+                },
+                {
+                    "step": 2,
+                    "description": "Realiza transferencias a cualquier hora por los montos que desees."
+                },
+                {
+                    "step": 3,
+                    "description": "Por cada operación exitosa recibirás un comprobante de la transacción."
+                }
+            ]
+        },
+        "status": "ACTIVE",
+        "testMode": false,
+        "createdAt": 1559855232,
+        "updatedAt": 1559855232,
+        "expiresAt": null
+    }
 }
 ```
 
-This endpoint deletes a specific kitten.
+Generación de cuentas CLABE ligadas a un Id del cliente y con la posibilidad de recibir todos los pagos que se envien a esta.
 
 ### HTTP Request
 
-`DELETE http://example.com/kittens/<ID>`
+`POST https://api.compropago.com/v2/createClabe`
 
-### URL Parameters
+### Query Parameters
 
-Parameter | Description
---------- | -----------
-ID | The ID of the kitten to delete
-
+Parameter | Type | Description
+--------- | ------- | -----------
+customer | object | Requerido. Objeto de la información del cliente.
+id | string | Requerido. Id del cliente.
+email | string | Requerido. Email del cliente, se le enviara un correo con la generación de la cuenta CLABE.
+phone | string | Opcional. Telefono del cliente donde enviaremos las instrucciones de su CLABE por SMS.
+payment | object | Requerido. Objeto con las configuraciones de la cuenta.
+frecuency | string | Requerido. Opciones: "unlimited" - se recibiran todos los pagos que lleguen a la cuenta CLABE generada.
+exp_date | epoch | Opcional. Fecha de expiración para la recepción de pagos en esta cuenta CLABE
+amount | float | Opcional. Recepción de pagos solo con el monto configurado
