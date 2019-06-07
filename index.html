@@ -209,7 +209,7 @@
       </span>
     </a>
     <div class="toc-wrapper">
-      <img src="images/logo.png" class="logo" alt="Logo" />
+      <!-- <= image_tag "", class: 'logo' %> -->
         <div class="lang-selector">
               <a href="#" data-language-name="shell">shell</a>
               <a href="#" data-language-name="ruby">ruby</a>
@@ -222,74 +222,60 @@
         <ul class="search-results"></ul>
       <ul id="toc" class="toc-list-h1">
           <li>
-            <a href="#introduction" class="toc-h1 toc-link" data-title="Introduction">Introduction</a>
+            <a href="#introduccion" class="toc-h1 toc-link" data-title="Introducción">Introducción</a>
           </li>
           <li>
-            <a href="#authentication" class="toc-h1 toc-link" data-title="Authentication">Authentication</a>
+            <a href="#autenticacion" class="toc-h1 toc-link" data-title="Autenticación">Autenticación</a>
           </li>
           <li>
-            <a href="#kittens" class="toc-h1 toc-link" data-title="Kittens">Kittens</a>
+            <a href="#spei" class="toc-h1 toc-link" data-title="SPEI">SPEI</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#get-all-kittens" class="toc-h2 toc-link" data-title="Get All Kittens">Get All Kittens</a>
+                    <a href="#crear-orden-de-pago" class="toc-h2 toc-link" data-title="Crear orden de pago">Crear orden de pago</a>
                   </li>
                   <li>
-                    <a href="#get-a-specific-kitten" class="toc-h2 toc-link" data-title="Get a Specific Kitten">Get a Specific Kitten</a>
+                    <a href="#verificar-orden-de-pago" class="toc-h2 toc-link" data-title="Verificar orden de pago">Verificar orden de pago</a>
                   </li>
                   <li>
-                    <a href="#delete-a-specific-kitten" class="toc-h2 toc-link" data-title="Delete a Specific Kitten">Delete a Specific Kitten</a>
+                    <a href="#crear-cuenta-clabe" class="toc-h2 toc-link" data-title="Crear cuenta CLABE">Crear cuenta CLABE</a>
                   </li>
               </ul>
           </li>
           <li>
-            <a href="#errors" class="toc-h1 toc-link" data-title="Errors">Errors</a>
+            <a href="#errores" class="toc-h1 toc-link" data-title="Errores">Errores</a>
           </li>
       </ul>
-        <ul class="toc-footer">
-            <li><a href='#'>Sign Up for a Developer Key</a></li>
-            <li><a href='https://github.com/lord/slate'>Documentation Powered by Slate</a></li>
-        </ul>
     </div>
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='introduction'>Introduction</h1>
-<p>Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.</p>
+        <h1 id='introduccion'>Introducción</h1>
+<p>ComproPago te ofrece un API tipo REST para integrar pagos en SPEI en tu comercio electrónico o tus aplicaciones.</p>
 
-<p>We have language bindings in Shell, Ruby, Python, and JavaScript! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.</p>
-
-<p>This example API documentation page was created with <a href="https://github.com/lord/slate">Slate</a>. Feel free to edit it and use it as a base for your own API&#39;s documentation.</p>
-<h1 id='authentication'>Authentication</h1>
+<p>La autenticación es vía HTTP por medio de llaves -API Keys- tanto en modo de pruebas como en modo activo. El API cuenta con métodos para accesar a los diferentes recursos -API Endpoints- los cuales actualmente te permiten realizar diversas operaciones, desde generar órdenes de pago hasta enviar instrucciones de pago vía SMS.</p>
+<h1 id='autenticacion'>Autenticación</h1>
 <blockquote>
 <p>To authorize, use this code:</p>
 </blockquote>
-<pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-</code></pre><pre class="highlight shell tab-shell"><code><span class="c"># With shell, you can just pass the correct header with each request</span>
-curl <span class="s2">"api_endpoint_here"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
+<pre class="highlight shell tab-shell"><code>curl <span class="s2">"api_endpoint_here"</span>
+  -u sk_live_xxxxxxxxxxxxxx:pk_live_xxxxxxxxxxxxxxx
 </code></pre>
 <blockquote>
-<p>Make sure to replace <code>meowmeowmeow</code> with your API key.</p>
+<p>Asegurate de remplazar <code>sk_live_xxxxxxxxxxxxxx:pk_live_xxxxxxxxxxxxxxx</code> tus llaves del API.</p>
 </blockquote>
 
-<p>Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our <a href="http://example.com/developers">developer portal</a>.</p>
+<p>Ponemos a tu disposición dos pares de llaves -API Keys- en la sección <a href="https://panel.compropago.com/panel/configuracion">panel/configuración</a>, con ellas puedes interactuar con nuestro sistema en sus diferentes modos de operación.</p>
 
-<p>Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:</p>
+<p>Es posible utilizar más de una llave al mismo tiempo; es decir, puedes realizar cargos en modo activo o producción y al mismo tiempo tu equipo de desarrollo puede hacer cargos de prueba sin afectar la configuración de tu aplicación.</p>
 
-<p><code>Authorization: meowmeowmeow</code></p>
+<p>La autenticación de tu aplicación con ComproPago es por medio de HTTP Basic Authentication: proporciona alguna de tus llaves como username, no necesitas proporcionar un password.</p>
+
+<p><code>sk_live_xxxxxxxxxxxxxx:pk_live_xxxxxxxxxxxxxxx</code></p>
 
 <aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
+Debes remplazar <code>sk_live_xxxxxxxxxxxxxx:pk_live_xxxxxxxxxxxxxxx</code> con tus llaves del API.
 </aside>
-<h1 id='kittens'>Kittens</h1><h2 id='get-all-kittens'>Get All Kittens</h2><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
+<h1 id='spei'>SPEI</h1><h2 id='crear-orden-de-pago'>Crear orden de pago</h2><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
 
 <span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
 <span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span>
@@ -307,137 +293,339 @@ You must replace <code>meowmeowmeow</code> with your personal API key.
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
-<pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fluffums"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"calico"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Max"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">]</span><span class="w">
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"object"</span><span class="p">:</span><span class="w"> </span><span class="s2">"orders.create"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success.create"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"request"</span><span class="p">:</span><span class="w"> </span><span class="mi">1559853010380</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/v2/orders"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"map"</span><span class="p">:</span><span class="w"> </span><span class="s2">"76ab15b2-f7c3-4a95-a662-b5cc4a2a9938"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ch_ca001318-7f70-47a9-90a2-df3e755d9be3"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"shortId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"481AD8F9"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"product"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SMGCURL1"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">150</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SAMSUNG GOLD CURL"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MXN"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://dummyurl.com/smgcul1.jpg"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"customer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Waldix"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"waldix@compropago.com"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5513899832"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"payment"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SPEI"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"fee"</span><span class="p">:</span><span class="w"> </span><span class="mf">10.25</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"iva"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.64</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"clabe"</span><span class="p">:</span><span class="w"> </span><span class="s2">"646180146400219781"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"instructions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="s2">"step"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Agrega la cuenta CLABE en tu banca en linea para banco STP."</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="s2">"step"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Una vez dada de alta la cuenta CLABE, realiza el deposito por la cantidad exacta."</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="s2">"step"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Ya que realizaste el pago, recibiras un comprobante de transacción exitosa y nuestro sistema confirmara automáticamente el pago."</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+            </span><span class="p">]</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PENDING"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"testMode"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"exchange"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"rate"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"finalAmount"</span><span class="p">:</span><span class="w"> </span><span class="mi">150</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"originAmount"</span><span class="p">:</span><span class="w"> </span><span class="mi">150</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"finalCurrency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MXN"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"originCurrency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MXN"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"extras"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+        </span><span class="s2">"client"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ms-api"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0.0"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="mi">1559853010</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="mi">1559853010</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"expiresAt"</span><span class="p">:</span><span class="w"> </span><span class="mi">1560139200</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>This endpoint retrieves all kittens.</p>
+<p>Generación de orden de pago para SPEI. 
+Nota. Si envias un id en el objeto customer, siempre que envies este identificador te regresaremos la misma cuenta CLABE con la finalidad de que el cliente no tenga que estar dando de alta varias cuentas en su banca en linea.</p>
 <h3 id='http-request'>HTTP Request</h3>
-<p><code>GET http://example.com/api/kittens</code></p>
+<p><code>POST https://api.compropago.com/v2/orders</code></p>
 <h3 id='query-parameters'>Query Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
-<th>Default</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>include_cats</td>
-<td>false</td>
-<td>If set to true, the result will also include cats.</td>
+<td>product</td>
+<td>Object</td>
+<td>Requerido. Objeto del producto a pagar</td>
 </tr>
 <tr>
-<td>available</td>
-<td>true</td>
-<td>If set to false, the result will include kittens that have already been adopted.</td>
+<td>id</td>
+<td>string</td>
+<td>Requerido. Identificador del producto o servicio</td>
+</tr>
+<tr>
+<td>price</td>
+<td>float</td>
+<td>Requerido. Precio del producto o servicio</td>
+</tr>
+<tr>
+<td>name</td>
+<td>string</td>
+<td>Requerido. Nombre del producto o servicio</td>
+</tr>
+<tr>
+<td>url</td>
+<td>string</td>
+<td>Opcional. Url de la imagen del producto o servicio</td>
+</tr>
+<tr>
+<td>customer</td>
+<td>Object</td>
+<td>Requerido. Objeto del cliente.</td>
+</tr>
+<tr>
+<td>id</td>
+<td>string</td>
+<td>Requerido. Id del cliente.</td>
+</tr>
+<tr>
+<td>name</td>
+<td>string</td>
+<td>Requerido. Nombre del cliente</td>
+</tr>
+<tr>
+<td>email</td>
+<td>string</td>
+<td>Requerido. Email del cliente</td>
+</tr>
+<tr>
+<td>phone</td>
+<td>string</td>
+<td>Opcional. Teléfono del cliente</td>
+</tr>
+<tr>
+<td>payment</td>
+<td>Object</td>
+<td>Requerido. Objeto del pago</td>
+</tr>
+<tr>
+<td>type</td>
+<td>string</td>
+<td>Requerido.  Tipo de pago *default &quot;SPEI&quot;</td>
 </tr>
 </tbody></table>
 
-<aside class="success">
+<!-- <aside class="success">
 Remember — a happy kitten is an authenticated kitten!
-</aside>
-<h2 id='get-a-specific-kitten'>Get a Specific Kitten</h2><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens/2"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">max</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+</aside> -->
+<h2 id='verificar-orden-de-pago'>Verificar orden de pago</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.compropago.com/v2/orders/ch_c1c0983d-6318-4f65-838c-8ff60afacf18"</span>
+  -u sk_live:pk_live
 </code></pre>
 <blockquote>
-<p>The above command returns JSON structured like this:</p>
+<p>El comando anterior regresa el JSON estructurado de la siguiente manera:</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Max"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
-</span><span class="p">}</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ch_c1c0983d-6318-4f65-838c-8ff60afacf18"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"shortId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3B92A8FC"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"product"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SMGCURL1"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">12.56</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SAMSUNG GOLD CURL"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MXN"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"customer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Ernesto Perez"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"luis_mtzg@msn.com"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"payment"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SPEI"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"fee"</span><span class="p">:</span><span class="w"> </span><span class="mf">8.19</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"iva"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.31</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"clabe"</span><span class="p">:</span><span class="w"> </span><span class="s2">"000000000000000000"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"instructions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+              </span><span class="p">{</span><span class="w">
+                  </span><span class="s2">"step"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+                  </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Agrega la cuenta CLABE en tu banca en linea para banco STP."</span><span class="w">
+              </span><span class="p">},</span><span class="w">
+              </span><span class="p">{</span><span class="w">
+                  </span><span class="s2">"step"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+                  </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Una vez dada de alta la cuenta CLABE, realiza el deposito por la cantidad exacta."</span><span class="w">
+              </span><span class="p">},</span><span class="w">
+              </span><span class="p">{</span><span class="w">
+                  </span><span class="s2">"step"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+                  </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Ya que realizaste el pago, recibiras un comprobante de transacción exitosa y nuestro sistema confirmara automáticamente el pago."</span><span class="w">
+              </span><span class="p">}</span><span class="w">
+          </span><span class="p">]</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PENDING"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"testMode"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"exchange"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"rate"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"finalAmount"</span><span class="p">:</span><span class="w"> </span><span class="mf">12.56</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"originAmount"</span><span class="p">:</span><span class="w"> </span><span class="mf">12.56</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"finalCurrency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MXN"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"originCurrency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MXN"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"extras"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+      </span><span class="s2">"api"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ms-api"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0.0"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="mi">1522082069321</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="mi">1522082069321</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"expiresAt"</span><span class="p">:</span><span class="w"> </span><span class="mi">1522254869321</span><span class="w">
+  </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>This endpoint retrieves a specific kitten.</p>
+<p>Verifica y obtiene los detalles de una orden existente.</p>
 
-<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
+<!-- <aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside> -->
 <h3 id='http-request-2'>HTTP Request</h3>
-<p><code>GET http://example.com/kittens/&lt;ID&gt;</code></p>
+<p><code>GET https://api.compropago.com/v2/orders/&lt;ID&gt;</code></p>
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>ID</td>
-<td>The ID of the kitten to retrieve</td>
+<td>string</td>
+<td>Requerido. Id de la orden de pago generada.</td>
 </tr>
 </tbody></table>
-<h2 id='delete-a-specific-kitten'>Delete a Specific Kitten</h2><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">delete</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens/2"</span>
-  -X DELETE
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">max</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="k">delete</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+<h2 id='crear-cuenta-clabe'>Crear cuenta CLABE</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.compropago.com/v2/createClabe"</span>
+-u sk_live:pk_live <span class="se">\</span>
+-X POST <span class="se">\</span>
+-d <span class="s1">'{
+      "customer":{
+            "id": "1",
+            "email": "customer@email.com",
+            "phone": "5555555555"
+        },
+        "payment":{
+            "frecuency": "unlimited",
+            "exp_date": null,
+            "amount": null
+        }
+    }'</span> 
 </code></pre>
 <blockquote>
-<p>The above command returns JSON structured like this:</p>
+<p>El comando anterior regresa el JSON estructurado de la siguiente manera:</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"deleted"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">":("</span><span class="w">
+    </span><span class="s2">"object"</span><span class="p">:</span><span class="w"> </span><span class="s2">"orders.createClabe"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success.create"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"request"</span><span class="p">:</span><span class="w"> </span><span class="mi">1559855232441</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/v2/createClabe"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"map"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dd91e4b5-4a3f-472e-a3bb-4d53f52902f6"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"customer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"customer@email.com"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5555555555"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"payment"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"clabe"</span><span class="p">:</span><span class="w"> </span><span class="s2">"000000000000000000"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"frecuency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unlimited"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"instructions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="s2">"step"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Agrégala en tu banca en línea seleccionando como banco: STP."</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="s2">"step"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Realiza transferencias a cualquier hora por los montos que desees."</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="s2">"step"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Por cada operación exitosa recibirás un comprobante de la transacción."</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+            </span><span class="p">]</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ACTIVE"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"testMode"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="mi">1559855232</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="mi">1559855232</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"expiresAt"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+    </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>This endpoint deletes a specific kitten.</p>
+<p>Generación de cuentas CLABE ligadas a un Id del cliente y con la posibilidad de recibir todos los pagos que se envien a esta.</p>
 <h3 id='http-request-3'>HTTP Request</h3>
-<p><code>DELETE http://example.com/kittens/&lt;ID&gt;</code></p>
-<h3 id='url-parameters-2'>URL Parameters</h3>
+<p><code>POST https://api.compropago.com/v2/createClabe</code></p>
+<h3 id='query-parameters-2'>Query Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>ID</td>
-<td>The ID of the kitten to delete</td>
+<td>customer</td>
+<td>object</td>
+<td>Requerido. Objeto de la información del cliente.</td>
+</tr>
+<tr>
+<td>id</td>
+<td>string</td>
+<td>Requerido. Id del cliente.</td>
+</tr>
+<tr>
+<td>email</td>
+<td>string</td>
+<td>Requerido. Email del cliente, se le enviara un correo con la generación de la cuenta CLABE.</td>
+</tr>
+<tr>
+<td>phone</td>
+<td>string</td>
+<td>Opcional. Telefono del cliente donde enviaremos las instrucciones de su CLABE por SMS.</td>
+</tr>
+<tr>
+<td>payment</td>
+<td>object</td>
+<td>Requerido. Objeto con las configuraciones de la cuenta.</td>
+</tr>
+<tr>
+<td>frecuency</td>
+<td>string</td>
+<td>Requerido. Opciones: &quot;unlimited&quot; - se recibiran todos los pagos que lleguen a la cuenta CLABE generada.</td>
+</tr>
+<tr>
+<td>exp_date</td>
+<td>epoch</td>
+<td>Opcional. Fecha de expiración para la recepción de pagos en esta cuenta CLABE</td>
+</tr>
+<tr>
+<td>amount</td>
+<td>float</td>
+<td>Opcional. Recepción de pagos solo con el monto configurado</td>
 </tr>
 </tbody></table>
-<h1 id='errors'>Errors</h1>
-<aside class="notice">
+<h1 id='errores'>Errores</h1>
+<!-- <aside class="notice">
 This error section is stored in a separate file in <code>includes/_errors.md</code>. Slate allows you to optionally separate out your docs into many files...just save them to the <code>includes</code> folder and add them to the top of your <code>index.md</code>'s frontmatter. Files are included in the order listed.
-</aside>
-
-<p>The Kittn API uses the following error codes:</p>
+</aside> -->
 
 <table><thead>
 <tr>
@@ -455,15 +643,15 @@ This error section is stored in a separate file in <code>includes/_errors.md</co
 </tr>
 <tr>
 <td>403</td>
-<td>Forbidden -- The kitten requested is hidden for administrators only.</td>
+<td>Forbidden -- The compropago requested is hidden for administrators only.</td>
 </tr>
 <tr>
 <td>404</td>
-<td>Not Found -- The specified kitten could not be found.</td>
+<td>Not Found -- The specified compropago could not be found.</td>
 </tr>
 <tr>
 <td>405</td>
-<td>Method Not Allowed -- You tried to access a kitten with an invalid method.</td>
+<td>Method Not Allowed -- You tried to access a compropago with an invalid method.</td>
 </tr>
 <tr>
 <td>406</td>
@@ -471,7 +659,7 @@ This error section is stored in a separate file in <code>includes/_errors.md</co
 </tr>
 <tr>
 <td>410</td>
-<td>Gone -- The kitten requested has been removed from our servers.</td>
+<td>Gone -- The compropago requested has been removed from our servers.</td>
 </tr>
 <tr>
 <td>418</td>
@@ -479,7 +667,7 @@ This error section is stored in a separate file in <code>includes/_errors.md</co
 </tr>
 <tr>
 <td>429</td>
-<td>Too Many Requests -- You&#39;re requesting too many kittens! Slow down!</td>
+<td>Too Many Requests -- You&#39;re requesting too many compropago! Slow down!</td>
 </tr>
 <tr>
 <td>500</td>
