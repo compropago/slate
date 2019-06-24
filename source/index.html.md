@@ -332,3 +332,81 @@ payment | object | Requerido. Objeto con las configuraciones de la cuenta.
 frecuency | string | Requerido. Opciones: "unlimited" - se recibiran todos los pagos que lleguen a la cuenta CLABE generada.
 exp_date | epoch | Opcional. Fecha de expiración para la recepción de pagos en esta cuenta CLABE
 amount | float | Opcional. Recepción de pagos solo con el monto configurado
+
+## Crear cuentas con CLABE
+
+
+```shell
+curl "https://api.compropago.com/v2/createAccount"
+-u sk_live:pk_live \
+-X POST \
+-d '{
+        "name": "Alamedas de Espana",
+        "reference": "153",
+        "customer": {
+            "name": "CONDOVIVE_1234",
+            "email": "waldix86@gmail.com",
+            "phone": "6666"
+	    }
+    }'
+```
+
+> El comando anterior regresa el JSON estructurado de la siguiente manera:
+
+```json
+{
+    "object": "orders.createAccount",
+    "code": 200,
+    "status": "success",
+    "message": "success.create",
+    "request": 1561416434701,
+    "url": "/v2/createAccount",
+    "map": "97281aa7-04b0-4cc7-bc7f-e97c7a609f3f",
+    "data": {
+        "name": "Alamedas de Espana",
+        "reference": "153",
+        "customer": {
+            "name": "CONDOVIVE_1234",
+            "email": "waldix86@gmail.com",
+            "phone": "6666"
+        },
+        "payment": {
+            "instructions": [
+                {
+                    "step": 1,
+                    "description": "Agrégala en tu banca en línea seleccionando como banco: STP."
+                },
+                {
+                    "step": 2,
+                    "description": "Realiza transferencias a cualquier hora por los montos que desees."
+                },
+                {
+                    "step": 3,
+                    "description": "Por cada operación exitosa recibirás un comprobante de la transacción."
+                }
+            ]
+        },
+        "status": "ACTIVE",
+        "testMode": false,
+        "createdAt": 1561416434,
+        "updatedAt": 1561416434
+    }
+}
+```
+
+Generación de clientes con cuenta CLABE ligados a una cuenta para el manejo de saldos.
+
+### HTTP Request
+
+`POST https://api.compropago.com/v2/createAccount`
+
+### Query Parameters
+
+Parameter | Type | Description
+--------- | ------- | -----------
+name | string | Requerido. Nombre de la cuenta.
+reference | string | Requerido. Identificador de la cuenta.
+customer | object | Requerido. Objeto de la información del cliente.
+name | string | Requerido. Nombre del cliente.
+email | string | Requerido. Email del cliente, se le enviara un correo con la generación de la cuenta CLABE.
+phone | string | Opcional. Telefono del cliente donde enviaremos las instrucciones de su CLABE por SMS.
