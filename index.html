@@ -239,6 +239,9 @@
                   <li>
                     <a href="#crear-cuenta-clabe" class="toc-h2 toc-link" data-title="Crear cuenta CLABE">Crear cuenta CLABE</a>
                   </li>
+                  <li>
+                    <a href="#crear-cuentas-con-clabe" class="toc-h2 toc-link" data-title="Crear cuentas con CLABE">Crear cuentas con CLABE</a>
+                  </li>
               </ul>
           </li>
           <li>
@@ -620,6 +623,103 @@ Remember — a happy kitten is an authenticated kitten!
 <td>amount</td>
 <td>float</td>
 <td>Opcional. Recepción de pagos solo con el monto configurado</td>
+</tr>
+</tbody></table>
+<h2 id='crear-cuentas-con-clabe'>Crear cuentas con CLABE</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.compropago.com/v2/createAccount"</span>
+-u sk_live:pk_live <span class="se">\</span>
+-X POST <span class="se">\</span>
+-d <span class="s1">'{
+        "name": "Alamedas de Espana",
+        "reference": "153",
+        "customer": {
+            "name": "CONDOVIVE_1234",
+            "email": "waldix86@gmail.com",
+            "phone": "6666"
+        }
+    }'</span>
+</code></pre>
+<blockquote>
+<p>El comando anterior regresa el JSON estructurado de la siguiente manera:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"object"</span><span class="p">:</span><span class="w"> </span><span class="s2">"orders.createAccount"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success.create"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"request"</span><span class="p">:</span><span class="w"> </span><span class="mi">1561416434701</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/v2/createAccount"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"map"</span><span class="p">:</span><span class="w"> </span><span class="s2">"97281aa7-04b0-4cc7-bc7f-e97c7a609f3f"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Alamedas de Espana"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"153"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"customer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CONDOVIVE_1234"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"waldix86@gmail.com"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6666"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"payment"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"instructions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="s2">"step"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Agrégala en tu banca en línea seleccionando como banco: STP."</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="s2">"step"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Realiza transferencias a cualquier hora por los montos que desees."</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="s2">"step"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Por cada operación exitosa recibirás un comprobante de la transacción."</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+            </span><span class="p">]</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ACTIVE"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"testMode"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="mi">1561416434</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="mi">1561416434</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Generación de clientes con cuenta CLABE ligados a una cuenta para el manejo de saldos.</p>
+<h3 id='http-request-4'>HTTP Request</h3>
+<p><code>POST https://api.compropago.com/v2/createAccount</code></p>
+<h3 id='query-parameters-3'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>string</td>
+<td>Requerido. Nombre de la cuenta.</td>
+</tr>
+<tr>
+<td>reference</td>
+<td>string</td>
+<td>Requerido. Identificador de la cuenta.</td>
+</tr>
+<tr>
+<td>customer</td>
+<td>object</td>
+<td>Requerido. Objeto de la información del cliente.</td>
+</tr>
+<tr>
+<td>name</td>
+<td>string</td>
+<td>Requerido. Nombre del cliente.</td>
+</tr>
+<tr>
+<td>email</td>
+<td>string</td>
+<td>Requerido. Email del cliente, se le enviara un correo con la generación de la cuenta CLABE.</td>
+</tr>
+<tr>
+<td>phone</td>
+<td>string</td>
+<td>Opcional. Telefono del cliente donde enviaremos las instrucciones de su CLABE por SMS.</td>
 </tr>
 </tbody></table>
 <h1 id='errores'>Errores</h1>
