@@ -240,7 +240,7 @@
                     <a href="#crear-cuenta-clabe" class="toc-h2 toc-link" data-title="Crear cuenta CLABE">Crear cuenta CLABE</a>
                   </li>
                   <li>
-                    <a href="#crear-cuentas-con-clabe" class="toc-h2 toc-link" data-title="Crear cuentas con CLABE">Crear cuentas con CLABE</a>
+                    <a href="#crear-cuentas-y-subcuentas-con-asignacion-de-clabe" class="toc-h2 toc-link" data-title="Crear cuentas y subcuentas con asignación de CLABE">Crear cuentas y subcuentas con asignación de CLABE</a>
                   </li>
               </ul>
           </li>
@@ -625,7 +625,7 @@ Remember — a happy kitten is an authenticated kitten!
 <td>Opcional. Recepción de pagos solo con el monto configurado</td>
 </tr>
 </tbody></table>
-<h2 id='crear-cuentas-con-clabe'>Crear cuentas con CLABE</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.compropago.com/v2/createAccount"</span>
+<h2 id='crear-cuentas-y-subcuentas-con-asignacion-de-clabe'>Crear cuentas y subcuentas con asignación de CLABE</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.compropago.com/v2/createAccount"</span>
 -u sk_live:pk_live <span class="se">\</span>
 -X POST <span class="se">\</span>
 -d <span class="s1">'{
@@ -702,27 +702,32 @@ Remember — a happy kitten is an authenticated kitten!
 <tr>
 <td>id</td>
 <td>string</td>
-<td>Requerido. Identificador de la cuenta.</td>
+<td>Requerido. Identificador de la cuenta, tiene que ser unico por cuenta.</td>
 </tr>
 <tr>
 <td>customer</td>
 <td>object</td>
-<td>Requerido. Objeto de la información del cliente o subcuenta.</td>
+<td>Requerido. Objeto de la información de la subcuenta.</td>
+</tr>
+<tr>
+<td>id</td>
+<td>string</td>
+<td>Requerido. Identificador de la subcuenta, tiene que ser unico por subcuenta.</td>
 </tr>
 <tr>
 <td>name</td>
 <td>string</td>
-<td>Requerido. Nombre del cliente o subcuenta.</td>
+<td>Requerido. Nombre de subcuenta.</td>
 </tr>
 <tr>
 <td>email</td>
 <td>string</td>
-<td>Requerido. Email del cliente o subcuenta, se le enviara un correo con la generación de la cuenta CLABE.</td>
+<td>Requerido. Email de subcuenta, se le enviara un correo con la generación de la cuenta CLABE.</td>
 </tr>
 <tr>
 <td>phone</td>
 <td>string</td>
-<td>Opcional. Telefono del cliente o subcuenta donde enviaremos las instrucciones de pago por SMS.</td>
+<td>Opcional. Telefono de la subcuenta a la cual se le enviaran las instrucciones de pago vía SMS.</td>
 </tr>
 </tbody></table>
 <h1 id='errores'>Errores</h1>
