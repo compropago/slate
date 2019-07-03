@@ -335,18 +335,18 @@ amount | float | Opcional. Recepción de pagos solo con el monto configurado
 
 ## Crear cuentas con CLABE
 
-
 ```shell
 curl "https://api.compropago.com/v2/createAccount"
 -u sk_live:pk_live \
 -X POST \
 -d '{
-        "name": "Alamedas de Espana",
-        "reference": "153",
+        "name": "Condominio Polanco",
+        "id": "001",
         "customer": {
-            "name": "CONDOVIVE_1234",
-            "email": "waldix86@gmail.com",
-            "phone": "6666"
+            "id": "101",
+            "name": "Departamento_101",
+            "email": "email@gmail.com",
+            "phone": "5555555555"
 	    }
     }'
 ```
@@ -363,14 +363,16 @@ curl "https://api.compropago.com/v2/createAccount"
     "url": "/v2/createAccount",
     "map": "97281aa7-04b0-4cc7-bc7f-e97c7a609f3f",
     "data": {
-        "name": "Alamedas de Espana",
-        "reference": "153",
+        "name": "Condominio Polanco",
+        "id": "001",
         "customer": {
-            "name": "CONDOVIVE_1234",
-            "email": "waldix86@gmail.com",
-            "phone": "6666"
+            "id": "101",
+            "name": "Departamento_101",
+            "email": "email@gmail.com",
+            "phone": "5555555555"
         },
         "payment": {
+            "clabe": "646180146400231992",
             "instructions": [
                 {
                     "step": 1,
@@ -394,7 +396,7 @@ curl "https://api.compropago.com/v2/createAccount"
 }
 ```
 
-Generación de clientes con cuenta CLABE ligados a una cuenta para el manejo de saldos.
+Generación de cuentas y subcuentas ligadas a una CLABE para el abono de depositos mediant SPEI.
 
 ### HTTP Request
 
@@ -405,8 +407,8 @@ Generación de clientes con cuenta CLABE ligados a una cuenta para el manejo de 
 Parameter | Type | Description
 --------- | ------- | -----------
 name | string | Requerido. Nombre de la cuenta.
-reference | string | Requerido. Identificador de la cuenta.
-customer | object | Requerido. Objeto de la información del cliente.
-name | string | Requerido. Nombre del cliente.
-email | string | Requerido. Email del cliente, se le enviara un correo con la generación de la cuenta CLABE.
-phone | string | Opcional. Telefono del cliente donde enviaremos las instrucciones de su CLABE por SMS.
+id | string | Requerido. Identificador de la cuenta.
+customer | object | Requerido. Objeto de la información del cliente o subcuenta.
+name | string | Requerido. Nombre del cliente o subcuenta.
+email | string | Requerido. Email del cliente o subcuenta, se le enviara un correo con la generación de la cuenta CLABE.
+phone | string | Opcional. Telefono del cliente o subcuenta donde enviaremos las instrucciones de pago por SMS.
