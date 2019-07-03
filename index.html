@@ -629,12 +629,13 @@ Remember — a happy kitten is an authenticated kitten!
 -u sk_live:pk_live <span class="se">\</span>
 -X POST <span class="se">\</span>
 -d <span class="s1">'{
-        "name": "Alamedas de Espana",
-        "reference": "153",
+        "name": "Condominio Polanco",
+        "id": "001",
         "customer": {
-            "name": "CONDOVIVE_1234",
-            "email": "waldix86@gmail.com",
-            "phone": "6666"
+            "id": "101",
+            "name": "Departamento_101",
+            "email": "email@gmail.com",
+            "phone": "5555555555"
         }
     }'</span>
 </code></pre>
@@ -650,14 +651,16 @@ Remember — a happy kitten is an authenticated kitten!
     </span><span class="s2">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/v2/createAccount"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"map"</span><span class="p">:</span><span class="w"> </span><span class="s2">"97281aa7-04b0-4cc7-bc7f-e97c7a609f3f"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Alamedas de Espana"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"153"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Condominio Polanco"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"001"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"customer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CONDOVIVE_1234"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"waldix86@gmail.com"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6666"</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"101"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Departamento_101"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"email@gmail.com"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5555555555"</span><span class="w">
         </span><span class="p">},</span><span class="w">
         </span><span class="s2">"payment"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"clabe"</span><span class="p">:</span><span class="w"> </span><span class="s2">"646180146400231992"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"instructions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
                 </span><span class="p">{</span><span class="w">
                     </span><span class="s2">"step"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
@@ -680,7 +683,7 @@ Remember — a happy kitten is an authenticated kitten!
     </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>Generación de clientes con cuenta CLABE ligados a una cuenta para el manejo de saldos.</p>
+<p>Generación de cuentas y subcuentas ligadas a una CLABE para el abono de depositos mediant SPEI.</p>
 <h3 id='http-request-4'>HTTP Request</h3>
 <p><code>POST https://api.compropago.com/v2/createAccount</code></p>
 <h3 id='query-parameters-3'>Query Parameters</h3>
@@ -697,29 +700,29 @@ Remember — a happy kitten is an authenticated kitten!
 <td>Requerido. Nombre de la cuenta.</td>
 </tr>
 <tr>
-<td>reference</td>
+<td>id</td>
 <td>string</td>
 <td>Requerido. Identificador de la cuenta.</td>
 </tr>
 <tr>
 <td>customer</td>
 <td>object</td>
-<td>Requerido. Objeto de la información del cliente.</td>
+<td>Requerido. Objeto de la información del cliente o subcuenta.</td>
 </tr>
 <tr>
 <td>name</td>
 <td>string</td>
-<td>Requerido. Nombre del cliente.</td>
+<td>Requerido. Nombre del cliente o subcuenta.</td>
 </tr>
 <tr>
 <td>email</td>
 <td>string</td>
-<td>Requerido. Email del cliente, se le enviara un correo con la generación de la cuenta CLABE.</td>
+<td>Requerido. Email del cliente o subcuenta, se le enviara un correo con la generación de la cuenta CLABE.</td>
 </tr>
 <tr>
 <td>phone</td>
 <td>string</td>
-<td>Opcional. Telefono del cliente donde enviaremos las instrucciones de su CLABE por SMS.</td>
+<td>Opcional. Telefono del cliente o subcuenta donde enviaremos las instrucciones de pago por SMS.</td>
 </tr>
 </tbody></table>
 <h1 id='errores'>Errores</h1>
