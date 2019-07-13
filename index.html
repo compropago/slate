@@ -630,7 +630,7 @@ Remember — a happy kitten is an authenticated kitten!
 -X POST <span class="se">\</span>
 -d <span class="s1">'{
         "name": "Condominio Polanco",
-        "id": "001",
+        "reference": "001",
         "customer": {
             "id": "101",
             "name": "Departamento_101",
@@ -652,7 +652,7 @@ Remember — a happy kitten is an authenticated kitten!
     </span><span class="s2">"map"</span><span class="p">:</span><span class="w"> </span><span class="s2">"97281aa7-04b0-4cc7-bc7f-e97c7a609f3f"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Condominio Polanco"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"001"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"001"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"customer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
             </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"101"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Departamento_101"</span><span class="p">,</span><span class="w">
@@ -683,7 +683,7 @@ Remember — a happy kitten is an authenticated kitten!
     </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>Generación de cuentas y subcuentas ligadas a una CLABE para el abono de depositos mediante SPEI.</p>
+<p>Generación de cuentas y subcuentas ligadas a una CLABE para el abono de depósitos mediante SPEI.</p>
 <h3 id='http-request-4'>HTTP Request</h3>
 <p><code>POST https://api.compropago.com/v2/createAccount</code></p>
 <h3 id='query-parameters-3'>Query Parameters</h3>
@@ -702,7 +702,7 @@ Remember — a happy kitten is an authenticated kitten!
 <tr>
 <td>id</td>
 <td>string</td>
-<td>Requerido. Identificador de la cuenta, tiene que ser unico por cuenta.</td>
+<td>Requerido. Identificador de la cuenta, tiene que ser único por cuenta.</td>
 </tr>
 <tr>
 <td>customer</td>
@@ -712,7 +712,7 @@ Remember — a happy kitten is an authenticated kitten!
 <tr>
 <td>id</td>
 <td>string</td>
-<td>Requerido. Identificador de la subcuenta, tiene que ser unico por subcuenta.</td>
+<td>Requerido. Identificador de la subcuenta, tiene que ser único por subcuenta.</td>
 </tr>
 <tr>
 <td>name</td>
