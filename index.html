@@ -248,6 +248,9 @@
                   <li>
                     <a href="#listar-subcuentas" class="toc-h2 toc-link" data-title="Listar subcuentas">Listar subcuentas</a>
                   </li>
+                  <li>
+                    <a href="#listar-transacciones-recibidas-en-la-subcuenta" class="toc-h2 toc-link" data-title="Listar transacciones recibidas en la subcuenta">Listar transacciones recibidas en la subcuenta</a>
+                  </li>
               </ul>
           </li>
           <li>
@@ -804,6 +807,58 @@ Remember — a happy kitten is an authenticated kitten!
 <p>Listado de subcuentas conformadas por nombre y CLABE</p>
 <h3 id='http-request-6'>HTTP Request</h3>
 <p><code>GET https://api.compropago.com/v2/accounts/170</code></p>
+<h2 id='listar-transacciones-recibidas-en-la-subcuenta'>Listar transacciones recibidas en la subcuenta</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.compropago.com/v2/accounts/&lt;ID&gt;/transactions?clabe=&lt;CLABE&gt;"</span> -u sk_live:pk_live
+</code></pre>
+<blockquote>
+<p>El comando anterior regresa el JSON estructurado de la siguiente manera:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"object"</span><span class="p">:</span><span class="w"> </span><span class="s2">"orders.get_transactions"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success.get_transactions"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"request"</span><span class="p">:</span><span class="w"> </span><span class="mi">1564093161840</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/v2/accounts/186/transactions"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"map"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a018844d-5bc9-43aa-b9e4-2dfd65ce7353"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"b079d0fe-7719-4ffd-a899-46044410d940"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-07-24T21:26:00.470821"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"paid"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Abono"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"085903161360320595"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a12200d1-1395-43ef-a12f-7854ca5ef146"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-07-24T21:26:00.470821"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">-0.1</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"paid"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Comisión en % por operación"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"085903161360320595"</span><span class="w">
+        </span><span class="p">},</span><span class="w">        
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"935adeb9-9513-487c-a07c-25a5a32f42e9"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-07-24T21:26:00.470821"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">-8</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"paid"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Comisión fija por operación"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"085903161360320595"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"821cef90-6644-4d3d-8b09-945a19bb69c9"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-07-24T21:26:00.470821"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">-0.15</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"paid"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Comisión en % por operación"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"085903161360320595"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Listado de transacciones recibidas en la subcuenta, filtradas por la CLABE</p>
+<h3 id='http-request-7'>HTTP Request</h3>
+<p><code>GET https://api.compropago.com/v2/accounts/&lt;ID&gt;/transactions?clabe=&lt;CLABE&gt;</code></p>
 <h1 id='errores'>Errores</h1>
 <!-- <aside class="notice">
 This error section is stored in a separate file in <code>includes/_errors.md</code>. Slate allows you to optionally separate out your docs into many files...just save them to the <code>includes</code> folder and add them to the top of your <code>index.md</code>'s frontmatter. Files are included in the order listed.
