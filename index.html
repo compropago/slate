@@ -807,6 +807,20 @@ Remember — a happy kitten is an authenticated kitten!
 <p>Listado de subcuentas conformadas por nombre y CLABE</p>
 <h3 id='http-request-6'>HTTP Request</h3>
 <p><code>GET https://api.compropago.com/v2/accounts/170</code></p>
+<h3 id='arguments'>Arguments</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>ID</td>
+<td>string</td>
+<td>Requerido. Id de la subcuenta que se quiere consultar</td>
+</tr>
+</tbody></table>
 <h2 id='listar-transacciones-recibidas-en-la-subcuenta'>Listar transacciones recibidas en la subcuenta</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.compropago.com/v2/accounts/&lt;ID&gt;/transactions?clabe=&lt;CLABE&gt;"</span> -u sk_live:pk_live
 </code></pre>
 <blockquote>
@@ -859,6 +873,25 @@ Remember — a happy kitten is an authenticated kitten!
 <p>Listado de transacciones recibidas en la subcuenta, filtradas por la CLABE</p>
 <h3 id='http-request-7'>HTTP Request</h3>
 <p><code>GET https://api.compropago.com/v2/accounts/&lt;ID&gt;/transactions?clabe=&lt;CLABE&gt;</code></p>
+<h3 id='arguments-2'>Arguments</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>ID</td>
+<td>string</td>
+<td>Requerido. Id de la subcuenta que se quiere consultar</td>
+</tr>
+<tr>
+<td>CLABE</td>
+<td>string</td>
+<td>Opcional. Filtro para consultar las transaccions por cuenta CLABE</td>
+</tr>
+</tbody></table>
 <h1 id='errores'>Errores</h1>
 <!-- <aside class="notice">
 This error section is stored in a separate file in <code>includes/_errors.md</code>. Slate allows you to optionally separate out your docs into many files...just save them to the <code>includes</code> folder and add them to the top of your <code>index.md</code>'s frontmatter. Files are included in the order listed.
