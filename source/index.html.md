@@ -3,8 +3,11 @@ title: API Reference
 
 language_tabs: # must be one of https://git.io/vQNgJ
   - shell
+  - php
   - ruby
   - python
+  - csharp
+  - java
   - javascript
 
 toc_footers:
@@ -25,15 +28,77 @@ La autenticación es vía HTTP por medio de llaves -API Keys- tanto en modo de p
 
 # Autenticación
 
-> To authorize, use this code:
-
+> Para autentificar, use este código:
 
 ```shell
-curl "api_endpoint_here"
-  -u sk_live_xxxxxxxxxxxxxx:pk_live_xxxxxxxxxxxxxxx
+curl "api_endpoint_here" \
+-u sk_live_xxxxxxxxxxxxxx:pk_live_xxxxxxxxxxxxxxx
 ```
 
-> Asegurate de remplazar `sk_live_xxxxxxxxxxxxxx:pk_live_xxxxxxxxxxxxxxx` tus llaves del API.
+```php
+<?php
+# Using SDK-PHP
+require 'vendor/autoload.php';
+
+# Importar objeto Spei
+use SpeiSdk\Resources\Payments\Spei;
+
+# Configuración de las llaves de SPEI en el cliente
+$client = (new Spei)->withKeys(
+    'pk_live_xxxxxxxxxxxxxxxxxx',
+    'sk_live_xxxxxxxxxxxxxxxxxx'
+);
+```
+
+```ruby
+# Using SDK-Ruby
+require 'spei_sdk'
+
+# Configuración de las llaves de SPEI en el cliente
+client = Client.new(
+    'pk_live_xxxxxxxxxxxxxxxxxx',
+    'sk_live_xxxxxxxxxxxxxxxxxx'
+)
+```
+
+```python
+# Using SDK-Python
+from spei_sdk.resources.payments import Spei
+
+# Configuración de las llaves de SPEI en el cliente
+client = Spei(
+    'pk_live_xxxxxxxxxxxxxxxxxx',
+    'sk_live_xxxxxxxxxxxxxxxxxx'
+)
+```
+
+```csharp
+// Using SDK-C# .NET
+using SpeiSdk;
+
+// Configuración de las llaves de SPEI en el cliente
+var client = new Spei(
+    "pk_live_xxxxxxxxxxxxxxxxxx",
+    "sk_live_xxxxxxxxxxxxxxxxxx"
+);
+```
+
+```java
+// Using SDK-Java
+import speisdk.*;
+
+// Configuración de las llaves de SPEI en el cliente
+Client client = new Client(
+    "pk_live_xxxxxxxxxxxxxxxxxx",
+    "sk_live_xxxxxxxxxxxxxxxxxx"
+);
+```
+
+```javascript
+
+```
+
+> Asegurate de remplazar `sk_live_xxxxxxxxxxxxxxxxxx:pk_live_xxxxxxxxxxxxxxxxxx` por tus llaves del API.
 
 Ponemos a tu disposición dos pares de llaves -API Keys- en la sección [panel/configuración](https://panel.compropago.com/panel/configuracion), con ellas puedes interactuar con nuestro sistema en sus diferentes modos de operación.
 
@@ -44,37 +109,161 @@ La autenticación de tu aplicación con ComproPago es por medio de HTTP Basic Au
 `sk_live_xxxxxxxxxxxxxx:pk_live_xxxxxxxxxxxxxxx`
 
 <aside class="notice">
-Debes remplazar <code>sk_live_xxxxxxxxxxxxxx:pk_live_xxxxxxxxxxxxxxx</code> con tus llaves del API.
+Debes remplazar <code>sk_live_xxxxxxxxxxxxxx:pk_live_xxxxxxxxxxxxxxx</code> por tus llaves del API.
 </aside>
 
 # SPEI
 
 ## Crear orden de pago
 
-```ruby
-require 'kittn'
+> Ejemplo para crear una orden:
 
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get
+```shell
+curl "https://api.compropago.com/v2/orders" \
+-u sk_live_xxxxxxxxxxxxxxxxxx:pk_live_xxxxxxxxxxxxxxxxxx \
+-H 'Content-Type: application/json'
+```
+
+```php
+<?php
+# Arreglo con información de la orden
+$orderInformation = [
+    "product" => [
+        "id" => "10001",
+        "price" => 1499.99,
+        "name" => "SPEI Order from PHP",
+        "currency" => "MXN",
+        "url" => "http://dummyurl.com/prod10001.jpg"
+    ],
+    "customer" => [
+        "id" => "12345",
+        "name" => "Nombre del Cliente",
+        "email" => "cliente@dominio.com",
+        "phone" => "55222999888"
+    ],
+    "payment" =>  [
+        "type" => "SPEI"
+    ],
+    "expiresAt" => strtotime("+2 day"),
+];
+
+# Llamada al método del API para generar una orden de pago
+$order = $client->createOrder($orderInformation);
+```
+
+```ruby
+# Arreglo con información de la orden
+order_information = [
+    :product => [
+        :id => "10001",
+        :price => 1499.99,
+        :name => "SPEI Order from Ruby",
+        :currency => "MXN",
+        :url => "http://dummyurl.com/prod10001.jpg"
+    ],
+    :customer => [
+        :id => "12345",
+        :name => "Nombre del Cliente",
+        :email => "cliente@dominio.com",
+        :phone => "55222999888"
+    ],
+    :payment =>  [
+        :type => "SPEI"
+    ],
+    :expiresAt => (DateTime.now + 2).to_time.to_i
+]
+
+# Llamada al método del API para generar una orden de pago
+order = client.create_order(order_information)
 ```
 
 ```python
-import kittn
+# Diccionario con información de la orden
+order_information = {
+    'product': {
+        'id': '10001',
+        'price': 1499.99,
+        'name': 'SPEI Order from Python',
+        'currency': 'MXN',
+        'url': 'http://dummyurl.com/product_0001.jpg'
+    },
+    'customer': {
+        'id': '12345',
+        'name': 'Nombre del Cliente',
+        'email': 'cliente@dominio.com',
+        'phone': '55222999888'
+    },
+    'payment': {
+        'type': 'SPEI'
+    },
+    'expiresAt': (datetime.now() + timedelta(days=2)).timestamp()
+}
 
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get()
+# Llamada al método del API para generar una orden de pago
+order = client.create_order(order_information)
 ```
 
-```shell
-curl "http://example.com/api/kittens"
-  -H "Authorization: meowmeowmeow"
+```csharp
+// Diccionario con información de la orden
+var order_information = new Dictionary
+{
+    {
+        "product", {
+            { "id", "10001" },
+            { "price", 1499.99 },
+            { "name", "SPEI Order from C# .NET" },
+            { "currency", "MXN" },
+            { "url", "http://dummyurl.com/prod10001.jpg" }
+        }
+    },
+    {
+        "customer", {
+            { "id", "12345" },
+            { "name", "Nombre del Cliente" },
+            { "email", "cliente@dominio.com" },
+            { "phone", "55222999888" }
+        }
+    },
+    {
+        "payment", {
+            { "TYPE", "SPEI" }
+        }
+    },
+    { "expiresAt", DateTimeOffset.Now.AddDays(2).ToUnixTimeSeconds() },
+};
+
+
+// Llamada al método del API para generar una orden de pago
+var order = client.CreateOrder(order_information);
+```
+
+```java
+// Objeto JSON con información de la orden
+JSONObject order_product = new JSONObject();
+order_product.put("id", "10001");
+order_product.put("price", 1499.99);
+order_product.put("name", "SPEI Order from Java");
+order_product.put("currency", "MXN");
+order_product.put("url", "http://dummyurl.com/prod10001.jpg");
+JSONObject order_customer = new JSONObject();
+order_customer.put("id", "12345");
+order_customer.put("name", "Nombre del Cliente");
+order_customer.put("email", "cliente@dominio.com");
+order_customer.put("phone", "55222999888");
+JSONObject order_payment = new JSONObject();
+order_payment.put("type", "SPEI");
+JSONObject order_information = new JSONObject();
+order_information.put("product", order_product);
+order_information.put("customer", order_customer);
+order_information.put("payment", order_payment);
+order_information.put("expiresAt", System.currentTimeMillis()/1000 + (2*60*60*24));
+
+// Llamada al método del API para generar una orden de pago
+Order order = client.CreateOrder(order_information);
 ```
 
 ```javascript
-const kittn = require('kittn');
 
-let api = kittn.authorize('meowmeowmeow');
-let kittens = api.kittens.get();
 ```
 
 > The above command returns JSON structured like this:
@@ -144,7 +333,7 @@ let kittens = api.kittens.get();
 }
 ```
 
-Generación de orden de pago para SPEI. 
+Generación de orden de pago para SPEI.
 Nota. Si envias un id en el objeto customer, siempre que envies este identificador te regresaremos la misma cuenta CLABE con la finalidad de que el cliente no tenga que estar dando de alta varias cuentas en su banca en linea.
 
 ### HTTP Request
@@ -155,18 +344,18 @@ Nota. Si envias un id en el objeto customer, siempre que envies este identificad
 
 Parameter | Type | Description
 --------- | ---- | -----------
-product | Object | Requerido. Objeto del producto a pagar
-id | string | Requerido. Identificador del producto o servicio
-price | float | Requerido. Precio del producto o servicio
-name | string | Requerido. Nombre del producto o servicio
-url | string | Opcional. Url de la imagen del producto o servicio
+product | Object | Requerido. Objeto del producto a pagar.
+id | string | Requerido. Identificador del producto o servicio.
+price | float | Requerido. Precio del producto o servicio.
+name | string | Requerido. Nombre del producto o servicio.
+url | string | Opcional. Url de la imagen del producto o servicio.
 customer | Object | Requerido. Objeto del cliente.
 id | string | Requerido. Id del cliente.
-name | string | Requerido. Nombre del cliente
-email | string | Requerido. Email del cliente
-phone | string | Opcional. Teléfono del cliente
-payment | Object | Requerido. Objeto del pago
-type | string | Requerido. 	Tipo de pago *default "SPEI"
+name | string | Requerido. Nombre del cliente.
+email | string | Requerido. Email del cliente.
+phone | string | Opcional. Teléfono del cliente.
+payment | Object | Requerido. Objeto del pago.
+type | string | Requerido. Tipo de pago *default "SPEI".
 
 <!-- <aside class="success">
 Remember — a happy kitten is an authenticated kitten!
@@ -175,8 +364,53 @@ Remember — a happy kitten is an authenticated kitten!
 ## Verificar orden de pago
 
 ```shell
-curl "https://api.compropago.com/v2/orders/ch_c1c0983d-6318-4f65-838c-8ff60afacf18"
-  -u sk_live:pk_live
+curl "https://api.compropago.com/v2/orders/ch_c1c0983d-6318-4f65-838c-8ff60afacf18" \
+-u sk_live_xxxxxxxxxxxxxxxxxx:pk_live_xxxxxxxxxxxxxxxxxx
+```
+
+```php
+<?php
+# Obtener el ID de la orden generada anteriormente
+$orderId = $order['data']['id'];
+
+# Llamada al método del API para recuperar la información de la orden de pago
+$verified = $compropagoSpei->verifyOrder($orderId);
+```
+
+```ruby
+# Obtener el ID de la orden generada anteriormente
+order_id = order.data.id
+
+# Llamada al método del API para recuperar la información de la orden de pago
+verified = client.verify_order(order_id)
+```
+
+```python
+# Obtener el ID de la orden generada anteriormente
+order_id = order.data.id
+
+# Llamada al método del API para recuperar la información de la orden de pago
+verified = client.verify_order(order_id)
+```
+
+```csharp
+// Obtener el ID de la orden generada anteriormente
+var order_id = order.data.id;
+
+// Llamada al método del API para recuperar la información de la orden de pago
+var verified = client.VerifyOrder(order_id);
+```
+
+```java
+// Obtener el ID de la orden generada anteriormente
+String order_id = order.data.id;
+
+// Llamada al método del API para recuperar la información de la orden de pago
+Order verified = client.VerifyOrder(order_id);
+```
+
+```javascript
+
 ```
 
 > El comando anterior regresa el JSON estructurado de la siguiente manera:
@@ -252,21 +486,123 @@ ID | string | Requerido. Id de la orden de pago generada.
 ## Crear cuenta CLABE
 
 ```shell
-curl "https://api.compropago.com/v2/createClabe"
--u sk_live:pk_live \
+curl "https://api.compropago.com/v2/createClabe" \
+-u sk_live_xxxxxxxxxxxxxxxxxx:pk_live_xxxxxxxxxxxxxxxxxx \
 -X POST \
 -d '{
-      "customer":{
-		    "id": "1",
-		    "email": "customer@email.com",
-		    "phone": "5555555555"
-	    },
-	    "payment":{
-		    "frecuency": "unlimited",
-		    "exp_date": null,
-		    "amount": null
-	    }
-    }' 
+        "customer": {
+            "id": "1",
+            "email": "customer@email.com",
+            "phone": "5555555555"
+        },
+        "payment": {
+            "frecuency": "unlimited",
+            "exp_date": null,
+            "amount": null
+        }
+    }'
+```
+
+```php
+<?php
+# Arreglo con información de la CLABE
+$clabe_information = [
+    "customer" => [
+        "id" => "1",
+        "email" => "customer@email.com",
+        "phone" => "5555555555"
+    ],
+    "payment" => [
+        "frecuency" => "unlimited",
+        "exp_date" => null,
+        "amount" => null,
+    ],
+];
+
+$clabe = $client->create_clabe($clabe_information);
+```
+
+```ruby
+# Arreglo con información de la CLABE
+clabe_information = [
+    :customer => [
+        :id => "1",
+        :email => "customer@email.com",
+        :phone => "5555555555"
+    ],
+    :payment => [
+        :frecuency => "unlimited",
+        :exp_date => None,
+        :amount => None
+    ]
+]
+
+clabe = client.create_clabe(clabe_information)
+```
+
+```python
+# Diccionario con información de la CLABE
+clabe_information = {
+    'customer': {
+        'id': '1',
+        'email': 'customer@email.com',
+        'phone': '5555555555'
+    },
+    'payment': {
+        'frecuency': 'unlimited',
+        'exp_date': None,
+        'amount': None
+    }
+}
+
+# Llamada al método del API
+clabe = client.create_clabe(clabe_information)
+```
+
+```csharp
+// Diccionario con información de la CLABE
+var clabe_information = new Dictionary
+{
+    {
+        "customer", {
+            { "id": "1" },
+            { "email": "customer@email.com" },
+            { "phone": "5555555555" }
+        }
+    },
+    {
+        "payment", {
+            { "frecuency": "unlimited" },
+            { "exp_date": null },
+            { "amount": null }
+        }
+    }
+};
+
+// Llamada al método del API
+var clabe = client.CreateClabe(clabe_information);
+```
+
+```java
+// Objeto JSON con información de la CLABE
+JSONObject clabe_customer = new JSONObject();
+clabe_customer.put("id", "1");
+clabe_customer.put("email", "customer@email.com");
+clabe_customer.put("phone", "5555555555");
+JSONObject clabe_payment = new JSONObject();
+clabe_payment.put("frecuency", "unlimited");
+clabe_payment.put("exp_date", null);
+clabe_payment.put("amount", null);
+JSONObject clabe_information = new JSONObject();
+clabe_information.put("customer", clabe_customer);
+clabe_information.put("payment", clabe_payment);
+
+// Llamada al método del API
+Clabe clabe = client.CreateClabe(clabe_information);
+```
+
+```javascript
+
 ```
 
 > El comando anterior regresa el JSON estructurado de la siguiente manera:
@@ -329,15 +665,15 @@ id | string | Requerido. Id del cliente.
 email | string | Requerido. Email del cliente, se le enviara un correo con la generación de la cuenta CLABE.
 phone | string | Opcional. Telefono del cliente donde enviaremos las instrucciones de su CLABE por SMS.
 payment | object | Requerido. Objeto con las configuraciones de la cuenta.
-frecuency | string | Requerido. Opciones: "unlimited" - se recibiran todos los pagos que lleguen a la cuenta CLABE generada.
+frecuency | string | Requerido. Opciones: `unlimited` - se recibiran todos los pagos que lleguen a la cuenta CLABE generada.
 exp_date | epoch | Opcional. Fecha de expiración para la recepción de pagos en esta cuenta CLABE
 amount | float | Opcional. Recepción de pagos solo con el monto configurado
 
-## Crear cuentas con CLABE
+## Crear cuentas y subcuentas
 
 ```shell
-curl "https://api.compropago.com/v2/createAccount"
--u sk_live:pk_live \
+curl "https://api.compropago.com/v2/createAccount" \
+-u sk_live_xxxxxxxxxxxxxxxxxx:pk_live_xxxxxxxxxxxxxxxxxx \
 -X POST \
 -d '{
         "name": "Condominio Polanco",
@@ -347,8 +683,98 @@ curl "https://api.compropago.com/v2/createAccount"
             "name": "Departamento_101",
             "email": "email@gmail.com",
             "phone": "5555555555"
-	    }
+        }
     }'
+```
+
+```php
+<?php
+# Información de la cuenta
+$account_information = [
+    'name' => 'Condominio Polanco',
+    'id' => '001',
+    'customer' => [
+        'id' => '101',
+        'name' => 'Departamento_101',
+        'email' => 'email@gmail.com',
+        'phone' => '5555555555'
+    ],
+];
+
+# Llamada al método del API
+$account = $client->create_account($account_information);
+```
+
+```ruby
+# Arreglo con información de la cuenta
+account_information = [
+    :name => 'Condominio Polanco',
+    :id => '001',
+    :customer => [
+        :id => '101',
+        :name => 'Departamento_101',
+        :email => 'email@gmail.com',
+        :phone => '5555555555'
+    ],
+];
+
+# Llamada al método del API
+account = client.create_account(account_information);
+```
+
+```python
+# Diccionario con información de la cuenta
+account_information = {
+    'name': 'Condominio Polanco',
+    'id': '001',
+    'customer': [
+        'id': '101',
+        'name': 'Departamento_101',
+        'email': 'email@gmail.com',
+        'phone': '5555555555'
+    ]
+}
+
+# Llamada al método del API
+account = client.create_account(account_information)
+```
+
+```csharp
+// Diccionario con información de la cuenta
+var account_information = new Dictionary
+{
+    { 'name', 'Condominio Polanco' },
+    { 'id', '001' },
+    { 'customer', {
+        { 'id': '101' },
+        { 'name': 'Departamento_101' },
+        { 'email': 'email@gmail.com' },
+        { 'phone': '5555555555' }
+    }
+};
+
+// Llamada al método del API
+var account = client.CreateAccount(account_information)
+```
+
+```java
+// Objeto JSON con información de la cuenta
+JSONObject account_customer = new JSONObject();
+account_information.put("id", "101");
+account_information.put("name", "Departamento_101");
+account_information.put("email", "email@gmail.com");
+account_information.put("phone", "5555555555");
+JSONObject account_information = new JSONObject();
+account_information.put("name", "Condominio Polanco");
+account_information.put("id", "001");
+account_information.put("customer", account_customer);
+
+// Llamada al método del API
+Account account = client.CreateAccount(account_information);
+```
+
+```javascript
+
 ```
 
 > El comando anterior regresa el JSON estructurado de la siguiente manera:
@@ -396,7 +822,7 @@ curl "https://api.compropago.com/v2/createAccount"
 }
 ```
 
-Generación de cuentas y subcuentas ligadas a una CLABE para el abono de depositos mediant SPEI.
+Generación de cuentas y subcuentas ligadas a una CLABE para el abono de depósitos mediante SPEI.
 
 ### HTTP Request
 
@@ -407,8 +833,243 @@ Generación de cuentas y subcuentas ligadas a una CLABE para el abono de deposit
 Parameter | Type | Description
 --------- | ------- | -----------
 name | string | Requerido. Nombre de la cuenta.
-id | string | Requerido. Identificador de la cuenta.
-customer | object | Requerido. Objeto de la información del cliente o subcuenta.
-name | string | Requerido. Nombre del cliente o subcuenta.
-email | string | Requerido. Email del cliente o subcuenta, se le enviara un correo con la generación de la cuenta CLABE.
-phone | string | Opcional. Telefono del cliente o subcuenta donde enviaremos las instrucciones de pago por SMS.
+reference | string | Requerido. Identificador de la cuenta, tiene que ser único por cuenta.
+customer | object | Requerido. Objeto de la información de la subcuenta.
+id | string | Requerido. Identificador de la subcuenta, tiene que ser único por subcuenta.
+name | string | Requerido. Nombre de subcuenta.
+email | string | Requerido. Email de subcuenta, se le enviara un correo con la generación de la cuenta CLABE.
+phone | string | Opcional. Teléfono de la subcuenta a la cual se le enviaran las instrucciones de pago vía SMS.
+
+## Listar cuentas
+
+```shell
+curl "https://api.compropago.com/v2/accounts" \
+-u sk_live_xxxxxxxxxxxxxx:pk_live_xxxxxxxxxxxxxxx
+```
+
+```php
+<?php
+
+```
+
+```ruby
+
+```
+
+```python
+
+```
+
+```csharp
+
+```
+
+```java
+
+```
+
+```javascript
+
+```
+
+> El comando anterior regresa el JSON estructurado de la siguiente manera:
+
+```json
+{
+    "object": "orders.get_accounts",
+    "code": 200,
+    "status": "success",
+    "message": "success.get_accounts",
+    "request": 1563056627957,
+    "url": "/v2/accounts",
+    "map": "68d68437-4dc2-4381-bfea-8e3cd86c03f7",
+    "data": [
+        {
+            "id": 169,
+            "reference": "1-005",
+            "name": "Condominio Candelaria",
+            "balance": 0
+        },
+        {
+            "id": 162,
+            "reference": "1-001",
+            "name": "Condominio Coyoacan",
+            "balance": 0
+        },
+        {
+            "id": 170,
+            "reference": "1-006",
+            "name": "Condominio Obrera",
+            "balance": 0
+        }
+    ]
+}
+```
+
+Listado de cuentas conformadas por id, referencia, nombre y saldo.
+
+### HTTP Request
+
+`GET https://api.compropago.com/v2/accounts`
+
+## Listar subcuentas
+
+```shell
+curl "https://api.compropago.com/v2/accounts/<ID>" \
+-u sk_live_xxxxxxxxxxxxxx:pk_live_xxxxxxxxxxxxxxx
+```
+
+```php
+<?php
+
+```
+
+```ruby
+
+```
+
+```python
+
+```
+
+```csharp
+
+```
+
+```java
+
+```
+
+```javascript
+
+```
+
+> El comando anterior regresa el JSON estructurado de la siguiente manera:
+
+```json
+{
+    "object": "orders.get_account",
+    "code": 200,
+    "status": "success",
+    "message": "success.get_account",
+    "request": 1563057051977,
+    "url": "/v2/accounts/170",
+    "map": "b5f76f16-76dd-471b-ad85-abb1834e3acf",
+    "data": [
+        {
+            "id": 170,
+            "name": "Departamento_101",
+            "clabe": "646180146400237132"
+        },
+        {
+            "id": 170,
+            "name": "Departamento_102",
+            "clabe": "646180146400237145"
+        }
+    ]
+}
+```
+
+Listado de subcuentas conformadas por nombre y CLABE.
+
+### HTTP Request
+
+`GET https://api.compropago.com/v2/accounts/<ID>`
+
+### URL Parameters
+
+Parameter | Type | Description
+--------- | ------- | -----------
+ID | string | Requerido. Id de la subcuenta que se quiere consultar.
+
+## Listar transacciones recibidas en la subcuenta
+
+```shell
+curl "https://api.compropago.com/v2/accounts/<ID>/transactions?clabe=<CLABE>" \
+-u sk_live_xxxxxxxxxxxxxx:pk_live_xxxxxxxxxxxxxxx
+```
+
+```php
+<?php
+```
+
+```ruby
+
+```
+
+```python
+
+```
+
+```csharp
+
+```
+
+```java
+
+```
+
+```javascript
+
+```
+
+> El comando anterior regresa el JSON estructurado de la siguiente manera:
+
+```json
+{
+    "object": "orders.get_transactions",
+    "code": 200,
+    "status": "success",
+    "message": "success.get_transactions",
+    "request": 1564093161840,
+    "url": "/v2/accounts/186/transactions",
+    "map": "a018844d-5bc9-43aa-b9e4-2dfd65ce7353",
+    "data": [
+        {
+            "id": "b079d0fe-7719-4ffd-a899-46044410d940",
+            "date": "1564003560",
+            "amount": 10,
+            "status": "paid",
+            "description": "Abono",
+            "reference": "085903161360320595"
+        },
+        {
+            "id": "a12200d1-1395-43ef-a12f-7854ca5ef146",
+            "date": "1564003560",
+            "amount": -0.1,
+            "status": "paid",
+            "description": "Comisión en % por operación",
+            "reference": "085903161360320595"
+        },
+        {
+            "id": "935adeb9-9513-487c-a07c-25a5a32f42e9",
+            "date": "1564003560",
+            "amount": -8,
+            "status": "paid",
+            "description": "Comisión fija por operación",
+            "reference": "085903161360320595"
+        },
+        {
+            "id": "821cef90-6644-4d3d-8b09-945a19bb69c9",
+            "date": "1564003560",
+            "amount": -0.15,
+            "status": "paid",
+            "description": "Comisión en % por operación",
+            "reference": "085903161360320595"
+        }
+    ]
+}
+```
+
+Listado de transacciones recibidas en la subcuenta, filtradas por la CLABE.
+
+### HTTP Request
+
+`GET https://api.compropago.com/v2/accounts/<ID>/transactions?clabe=<CLABE>`
+
+### URL Parameters
+
+Parameter | Type | Description
+--------- | ------- | -----------
+ID | string | Requerido. Id de la subcuenta que se quiere consultar.
+CLABE | string | Opcional. Filtro para consultar las transaccions por cuenta CLABE.
