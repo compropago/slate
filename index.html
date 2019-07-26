@@ -201,7 +201,7 @@
       <script src="javascripts/all.js"></script>
   </head>
 
-  <body class="index" data-languages="[&quot;shell&quot;,&quot;ruby&quot;,&quot;python&quot;,&quot;javascript&quot;]">
+  <body class="index" data-languages="[&quot;shell&quot;,&quot;php&quot;,&quot;ruby&quot;,&quot;python&quot;,&quot;csharp&quot;,&quot;java&quot;,&quot;javascript&quot;]">
     <a href="#" id="nav-button">
       <span>
         NAV
@@ -212,8 +212,11 @@
       <!-- <= image_tag "", class: 'logo' %> -->
         <div class="lang-selector">
               <a href="#" data-language-name="shell">shell</a>
+              <a href="#" data-language-name="php">php</a>
               <a href="#" data-language-name="ruby">ruby</a>
               <a href="#" data-language-name="python">python</a>
+              <a href="#" data-language-name="csharp">csharp</a>
+              <a href="#" data-language-name="java">java</a>
               <a href="#" data-language-name="javascript">javascript</a>
         </div>
         <div class="search">
@@ -267,13 +270,58 @@
 <p>La autenticación es vía HTTP por medio de llaves -API Keys- tanto en modo de pruebas como en modo activo. El API cuenta con métodos para accesar a los diferentes recursos -API Endpoints- los cuales actualmente te permiten realizar diversas operaciones, desde generar órdenes de pago hasta enviar instrucciones de pago vía SMS.</p>
 <h1 id='autenticacion'>Autenticación</h1>
 <blockquote>
-<p>To authorize, use this code:</p>
+<p>Para autentificar, use este código:</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>curl <span class="s2">"api_endpoint_here"</span>
-  -u sk_live_xxxxxxxxxxxxxx:pk_live_xxxxxxxxxxxxxxx
+<pre class="highlight shell tab-shell"><code>curl <span class="s2">"api_endpoint_here"</span> <span class="se">\</span>
+-u sk_live_xxxxxxxxxxxxxx:pk_live_xxxxxxxxxxxxxxx
+</code></pre><pre class="highlight php tab-php"><code><span class="cp">&lt;?php</span>
+<span class="c1"># Using SDK-PHP
+</span><span class="k">require</span> <span class="s1">'vendor/autoload.php'</span><span class="p">;</span>
+
+<span class="c1"># Importar objeto Spei
+</span><span class="k">use</span> <span class="nx">SpeiSdk\Resources\Payments\Spei</span><span class="p">;</span>
+
+<span class="c1"># Configuración de las llaves de SPEI en el cliente
+</span><span class="nv">$client</span> <span class="o">=</span> <span class="p">(</span><span class="k">new</span> <span class="nx">Spei</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">withKeys</span><span class="p">(</span>
+    <span class="s1">'pk_live_xxxxxxxxxxxxxxxxxx'</span><span class="p">,</span>
+    <span class="s1">'sk_live_xxxxxxxxxxxxxxxxxx'</span>
+<span class="p">);</span>
+</code></pre><pre class="highlight ruby tab-ruby"><code><span class="c1"># Using SDK-Ruby</span>
+<span class="nb">require</span> <span class="s1">'spei_sdk'</span>
+
+<span class="c1"># Configuración de las llaves de SPEI en el cliente</span>
+<span class="n">client</span> <span class="o">=</span> <span class="no">Client</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span>
+    <span class="s1">'pk_live_xxxxxxxxxxxxxxxxxx'</span><span class="p">,</span>
+    <span class="s1">'sk_live_xxxxxxxxxxxxxxxxxx'</span>
+<span class="p">)</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="c"># Using SDK-Python</span>
+<span class="kn">from</span> <span class="nn">spei_sdk.resources.payments</span> <span class="kn">import</span> <span class="n">Spei</span>
+
+<span class="c"># Configuración de las llaves de SPEI en el cliente</span>
+<span class="n">client</span> <span class="o">=</span> <span class="n">Spei</span><span class="p">(</span>
+    <span class="s">'pk_live_xxxxxxxxxxxxxxxxxx'</span><span class="p">,</span>
+    <span class="s">'sk_live_xxxxxxxxxxxxxxxxxx'</span>
+<span class="p">)</span>
+</code></pre><pre class="highlight csharp tab-csharp"><code><span class="c1">// Using SDK-C# .NET</span>
+<span class="k">using</span> <span class="nn">SpeiSdk</span><span class="p">;</span>
+
+<span class="c1">// Configuración de las llaves de SPEI en el cliente</span>
+<span class="kt">var</span> <span class="n">client</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Spei</span><span class="p">(</span>
+    <span class="s">"pk_live_xxxxxxxxxxxxxxxxxx"</span><span class="p">,</span>
+    <span class="s">"sk_live_xxxxxxxxxxxxxxxxxx"</span>
+<span class="p">);</span>
+</code></pre><pre class="highlight java tab-java"><code><span class="c1">// Using SDK-Java</span>
+<span class="kn">import</span> <span class="nn">speisdk.*</span><span class="o">;</span>
+
+<span class="c1">// Configuración de las llaves de SPEI en el cliente</span>
+<span class="n">Client</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Client</span><span class="o">(</span>
+    <span class="s">"pk_live_xxxxxxxxxxxxxxxxxx"</span><span class="o">,</span>
+    <span class="s">"sk_live_xxxxxxxxxxxxxxxxxx"</span>
+<span class="o">);</span>
+</code></pre><pre class="highlight javascript tab-javascript"><code>
 </code></pre>
 <blockquote>
-<p>Asegurate de remplazar <code>sk_live_xxxxxxxxxxxxxx:pk_live_xxxxxxxxxxxxxxx</code> tus llaves del API.</p>
+<p>Asegurate de remplazar <code>sk_live_xxxxxxxxxxxxxxxxxx:pk_live_xxxxxxxxxxxxxxxxxx</code> por tus llaves del API.</p>
 </blockquote>
 
 <p>Ponemos a tu disposición dos pares de llaves -API Keys- en la sección <a href="https://panel.compropago.com/panel/configuracion">panel/configuración</a>, con ellas puedes interactuar con nuestro sistema en sus diferentes modos de operación.</p>
@@ -285,22 +333,139 @@
 <p><code>sk_live_xxxxxxxxxxxxxx:pk_live_xxxxxxxxxxxxxxx</code></p>
 
 <aside class="notice">
-Debes remplazar <code>sk_live_xxxxxxxxxxxxxx:pk_live_xxxxxxxxxxxxxxx</code> con tus llaves del API.
+Debes remplazar <code>sk_live_xxxxxxxxxxxxxx:pk_live_xxxxxxxxxxxxxxx</code> por tus llaves del API.
 </aside>
-<h1 id='spei'>SPEI</h1><h2 id='crear-orden-de-pago'>Crear orden de pago</h2><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
+<h1 id='spei'>SPEI</h1><h2 id='crear-orden-de-pago'>Crear orden de pago</h2>
+<blockquote>
+<p>Ejemplo para crear una orden:</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.compropago.com/v2/orders"</span> <span class="se">\</span>
+-u sk_live_xxxxxxxxxxxxxxxxxx:pk_live_xxxxxxxxxxxxxxxxxx <span class="se">\</span>
+-H <span class="s1">'Content-Type: application/json'</span>
+</code></pre><pre class="highlight php tab-php"><code><span class="cp">&lt;?php</span>
+<span class="c1"># Arreglo con información de la orden
+</span><span class="nv">$orderInformation</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">"product"</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="s2">"id"</span> <span class="o">=&gt;</span> <span class="s2">"10001"</span><span class="p">,</span>
+        <span class="s2">"price"</span> <span class="o">=&gt;</span> <span class="mf">1499.99</span><span class="p">,</span>
+        <span class="s2">"name"</span> <span class="o">=&gt;</span> <span class="s2">"SPEI Order from PHP"</span><span class="p">,</span>
+        <span class="s2">"currency"</span> <span class="o">=&gt;</span> <span class="s2">"MXN"</span><span class="p">,</span>
+        <span class="s2">"url"</span> <span class="o">=&gt;</span> <span class="s2">"http://dummyurl.com/prod10001.jpg"</span>
+    <span class="p">],</span>
+    <span class="s2">"customer"</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="s2">"id"</span> <span class="o">=&gt;</span> <span class="s2">"12345"</span><span class="p">,</span>
+        <span class="s2">"name"</span> <span class="o">=&gt;</span> <span class="s2">"Nombre del Cliente"</span><span class="p">,</span>
+        <span class="s2">"email"</span> <span class="o">=&gt;</span> <span class="s2">"cliente@dominio.com"</span><span class="p">,</span>
+        <span class="s2">"phone"</span> <span class="o">=&gt;</span> <span class="s2">"55222999888"</span>
+    <span class="p">],</span>
+    <span class="s2">"payment"</span> <span class="o">=&gt;</span>  <span class="p">[</span>
+        <span class="s2">"type"</span> <span class="o">=&gt;</span> <span class="s2">"SPEI"</span>
+    <span class="p">],</span>
+    <span class="s2">"expiresAt"</span> <span class="o">=&gt;</span> <span class="nb">strtotime</span><span class="p">(</span><span class="s2">"+2 day"</span><span class="p">),</span>
+<span class="p">];</span>
 
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
+<span class="c1"># Llamada al método del API para generar una orden de pago
+</span><span class="nv">$order</span> <span class="o">=</span> <span class="nv">$client</span><span class="o">-&gt;</span><span class="na">createOrder</span><span class="p">(</span><span class="nv">$orderInformation</span><span class="p">);</span>
+</code></pre><pre class="highlight ruby tab-ruby"><code><span class="c1"># Arreglo con información de la orden</span>
+<span class="n">order_information</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="ss">:product</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="ss">:id</span> <span class="o">=&gt;</span> <span class="s2">"10001"</span><span class="p">,</span>
+        <span class="ss">:price</span> <span class="o">=&gt;</span> <span class="mi">1499</span><span class="o">.</span><span class="mi">99</span><span class="p">,</span>
+        <span class="ss">:name</span> <span class="o">=&gt;</span> <span class="s2">"SPEI Order from Ruby"</span><span class="p">,</span>
+        <span class="ss">:currency</span> <span class="o">=&gt;</span> <span class="s2">"MXN"</span><span class="p">,</span>
+        <span class="ss">:url</span> <span class="o">=&gt;</span> <span class="s2">"http://dummyurl.com/prod10001.jpg"</span>
+    <span class="p">],</span>
+    <span class="ss">:customer</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="ss">:id</span> <span class="o">=&gt;</span> <span class="s2">"12345"</span><span class="p">,</span>
+        <span class="ss">:name</span> <span class="o">=&gt;</span> <span class="s2">"Nombre del Cliente"</span><span class="p">,</span>
+        <span class="ss">:email</span> <span class="o">=&gt;</span> <span class="s2">"cliente@dominio.com"</span><span class="p">,</span>
+        <span class="ss">:phone</span> <span class="o">=&gt;</span> <span class="s2">"55222999888"</span>
+    <span class="p">],</span>
+    <span class="ss">:payment</span> <span class="o">=&gt;</span>  <span class="p">[</span>
+        <span class="ss">:type</span> <span class="o">=&gt;</span> <span class="s2">"SPEI"</span>
+    <span class="p">],</span>
+    <span class="ss">:expiresAt</span> <span class="o">=&gt;</span> <span class="p">(</span><span class="no">DateTime</span><span class="p">.</span><span class="nf">now</span> <span class="o">+</span> <span class="mi">2</span><span class="p">).</span><span class="nf">to_time</span><span class="p">.</span><span class="nf">to_i</span>
+<span class="p">]</span>
 
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
-</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
+<span class="c1"># Llamada al método del API para generar una orden de pago</span>
+<span class="n">order</span> <span class="o">=</span> <span class="n">client</span><span class="p">.</span><span class="nf">create_order</span><span class="p">(</span><span class="n">order_information</span><span class="p">)</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="c"># Diccionario con información de la orden</span>
+<span class="n">order_information</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">'product'</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s">'id'</span><span class="p">:</span> <span class="s">'10001'</span><span class="p">,</span>
+        <span class="s">'price'</span><span class="p">:</span> <span class="mf">1499.99</span><span class="p">,</span>
+        <span class="s">'name'</span><span class="p">:</span> <span class="s">'SPEI Order from Python'</span><span class="p">,</span>
+        <span class="s">'currency'</span><span class="p">:</span> <span class="s">'MXN'</span><span class="p">,</span>
+        <span class="s">'url'</span><span class="p">:</span> <span class="s">'http://dummyurl.com/product_0001.jpg'</span>
+    <span class="p">},</span>
+    <span class="s">'customer'</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s">'id'</span><span class="p">:</span> <span class="s">'12345'</span><span class="p">,</span>
+        <span class="s">'name'</span><span class="p">:</span> <span class="s">'Nombre del Cliente'</span><span class="p">,</span>
+        <span class="s">'email'</span><span class="p">:</span> <span class="s">'cliente@dominio.com'</span><span class="p">,</span>
+        <span class="s">'phone'</span><span class="p">:</span> <span class="s">'55222999888'</span>
+    <span class="p">},</span>
+    <span class="s">'payment'</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s">'type'</span><span class="p">:</span> <span class="s">'SPEI'</span>
+    <span class="p">},</span>
+    <span class="s">'expiresAt'</span><span class="p">:</span> <span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span> <span class="o">+</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span><span class="o">.</span><span class="n">timestamp</span><span class="p">()</span>
+<span class="p">}</span>
 
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">kittens</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="nx">get</span><span class="p">();</span>
+<span class="c"># Llamada al método del API para generar una orden de pago</span>
+<span class="n">order</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">create_order</span><span class="p">(</span><span class="n">order_information</span><span class="p">)</span>
+</code></pre><pre class="highlight csharp tab-csharp"><code><span class="c1">// Diccionario con información de la orden</span>
+<span class="kt">var</span> <span class="n">order_information</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Dictionary</span>
+<span class="p">{</span>
+    <span class="p">{</span>
+        <span class="s">"product"</span><span class="p">,</span> <span class="p">{</span>
+            <span class="p">{</span> <span class="s">"id"</span><span class="p">,</span> <span class="s">"10001"</span> <span class="p">},</span>
+            <span class="p">{</span> <span class="s">"price"</span><span class="p">,</span> <span class="m">1499.99</span> <span class="p">},</span>
+            <span class="p">{</span> <span class="s">"name"</span><span class="p">,</span> <span class="s">"SPEI Order from C# .NET"</span> <span class="p">},</span>
+            <span class="p">{</span> <span class="s">"currency"</span><span class="p">,</span> <span class="s">"MXN"</span> <span class="p">},</span>
+            <span class="p">{</span> <span class="s">"url"</span><span class="p">,</span> <span class="s">"http://dummyurl.com/prod10001.jpg"</span> <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+        <span class="s">"customer"</span><span class="p">,</span> <span class="p">{</span>
+            <span class="p">{</span> <span class="s">"id"</span><span class="p">,</span> <span class="s">"12345"</span> <span class="p">},</span>
+            <span class="p">{</span> <span class="s">"name"</span><span class="p">,</span> <span class="s">"Nombre del Cliente"</span> <span class="p">},</span>
+            <span class="p">{</span> <span class="s">"email"</span><span class="p">,</span> <span class="s">"cliente@dominio.com"</span> <span class="p">},</span>
+            <span class="p">{</span> <span class="s">"phone"</span><span class="p">,</span> <span class="s">"55222999888"</span> <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+        <span class="s">"payment"</span><span class="p">,</span> <span class="p">{</span>
+            <span class="p">{</span> <span class="s">"TYPE"</span><span class="p">,</span> <span class="s">"SPEI"</span> <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="p">{</span> <span class="s">"expiresAt"</span><span class="p">,</span> <span class="n">DateTimeOffset</span><span class="p">.</span><span class="n">Now</span><span class="p">.</span><span class="nf">AddDays</span><span class="p">(</span><span class="m">2</span><span class="p">).</span><span class="nf">ToUnixTimeSeconds</span><span class="p">()</span> <span class="p">},</span>
+<span class="p">};</span>
+
+
+<span class="c1">// Llamada al método del API para generar una orden de pago</span>
+<span class="kt">var</span> <span class="n">order</span> <span class="p">=</span> <span class="n">client</span><span class="p">.</span><span class="nf">CreateOrder</span><span class="p">(</span><span class="n">order_information</span><span class="p">);</span>
+</code></pre><pre class="highlight java tab-java"><code><span class="c1">// Objeto JSON con información de la orden</span>
+<span class="n">JSONObject</span> <span class="n">order_product</span> <span class="o">=</span> <span class="k">new</span> <span class="n">JSONObject</span><span class="o">();</span>
+<span class="n">order_product</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"id"</span><span class="o">,</span> <span class="s">"10001"</span><span class="o">);</span>
+<span class="n">order_product</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"price"</span><span class="o">,</span> <span class="mf">1499.99</span><span class="o">);</span>
+<span class="n">order_product</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"name"</span><span class="o">,</span> <span class="s">"SPEI Order from Java"</span><span class="o">);</span>
+<span class="n">order_product</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"currency"</span><span class="o">,</span> <span class="s">"MXN"</span><span class="o">);</span>
+<span class="n">order_product</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"url"</span><span class="o">,</span> <span class="s">"http://dummyurl.com/prod10001.jpg"</span><span class="o">);</span>
+<span class="n">JSONObject</span> <span class="n">order_customer</span> <span class="o">=</span> <span class="k">new</span> <span class="n">JSONObject</span><span class="o">();</span>
+<span class="n">order_customer</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"id"</span><span class="o">,</span> <span class="s">"12345"</span><span class="o">);</span>
+<span class="n">order_customer</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"name"</span><span class="o">,</span> <span class="s">"Nombre del Cliente"</span><span class="o">);</span>
+<span class="n">order_customer</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"email"</span><span class="o">,</span> <span class="s">"cliente@dominio.com"</span><span class="o">);</span>
+<span class="n">order_customer</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"phone"</span><span class="o">,</span> <span class="s">"55222999888"</span><span class="o">);</span>
+<span class="n">JSONObject</span> <span class="n">order_payment</span> <span class="o">=</span> <span class="k">new</span> <span class="n">JSONObject</span><span class="o">();</span>
+<span class="n">order_payment</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"type"</span><span class="o">,</span> <span class="s">"SPEI"</span><span class="o">);</span>
+<span class="n">JSONObject</span> <span class="n">order_information</span> <span class="o">=</span> <span class="k">new</span> <span class="n">JSONObject</span><span class="o">();</span>
+<span class="n">order_information</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"product"</span><span class="o">,</span> <span class="n">order_product</span><span class="o">);</span>
+<span class="n">order_information</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"customer"</span><span class="o">,</span> <span class="n">order_customer</span><span class="o">);</span>
+<span class="n">order_information</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"payment"</span><span class="o">,</span> <span class="n">order_payment</span><span class="o">);</span>
+<span class="n">order_information</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"expiresAt"</span><span class="o">,</span> <span class="n">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">()/</span><span class="mi">1000</span> <span class="o">+</span> <span class="o">(</span><span class="mi">2</span><span class="o">*</span><span class="mi">60</span><span class="o">*</span><span class="mi">60</span><span class="o">*</span><span class="mi">24</span><span class="o">));</span>
+
+<span class="c1">// Llamada al método del API para generar una orden de pago</span>
+<span class="n">Order</span> <span class="n">order</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">CreateOrder</span><span class="o">(</span><span class="n">order_information</span><span class="o">);</span>
+</code></pre><pre class="highlight javascript tab-javascript"><code>
 </code></pre>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
@@ -368,7 +533,7 @@ Debes remplazar <code>sk_live_xxxxxxxxxxxxxx:pk_live_xxxxxxxxxxxxxxx</code> con 
     </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>Generación de orden de pago para SPEI. 
+<p>Generación de orden de pago para SPEI.
 Nota. Si envias un id en el objeto customer, siempre que envies este identificador te regresaremos la misma cuenta CLABE con la finalidad de que el cliente no tenga que estar dando de alta varias cuentas en su banca en linea.</p>
 <h3 id='http-request'>HTTP Request</h3>
 <p><code>POST https://api.compropago.com/v2/orders</code></p>
@@ -383,27 +548,27 @@ Nota. Si envias un id en el objeto customer, siempre que envies este identificad
 <tr>
 <td>product</td>
 <td>Object</td>
-<td>Requerido. Objeto del producto a pagar</td>
+<td>Requerido. Objeto del producto a pagar.</td>
 </tr>
 <tr>
 <td>id</td>
 <td>string</td>
-<td>Requerido. Identificador del producto o servicio</td>
+<td>Requerido. Identificador del producto o servicio.</td>
 </tr>
 <tr>
 <td>price</td>
 <td>float</td>
-<td>Requerido. Precio del producto o servicio</td>
+<td>Requerido. Precio del producto o servicio.</td>
 </tr>
 <tr>
 <td>name</td>
 <td>string</td>
-<td>Requerido. Nombre del producto o servicio</td>
+<td>Requerido. Nombre del producto o servicio.</td>
 </tr>
 <tr>
 <td>url</td>
 <td>string</td>
-<td>Opcional. Url de la imagen del producto o servicio</td>
+<td>Opcional. Url de la imagen del producto o servicio.</td>
 </tr>
 <tr>
 <td>customer</td>
@@ -418,35 +583,62 @@ Nota. Si envias un id en el objeto customer, siempre que envies este identificad
 <tr>
 <td>name</td>
 <td>string</td>
-<td>Requerido. Nombre del cliente</td>
+<td>Requerido. Nombre del cliente.</td>
 </tr>
 <tr>
 <td>email</td>
 <td>string</td>
-<td>Requerido. Email del cliente</td>
+<td>Requerido. Email del cliente.</td>
 </tr>
 <tr>
 <td>phone</td>
 <td>string</td>
-<td>Opcional. Teléfono del cliente</td>
+<td>Opcional. Teléfono del cliente.</td>
 </tr>
 <tr>
 <td>payment</td>
 <td>Object</td>
-<td>Requerido. Objeto del pago</td>
+<td>Requerido. Objeto del pago.</td>
 </tr>
 <tr>
 <td>type</td>
 <td>string</td>
-<td>Requerido.  Tipo de pago *default &quot;SPEI&quot;</td>
+<td>Requerido. Tipo de pago *default &quot;SPEI&quot;.</td>
 </tr>
 </tbody></table>
 
 <!-- <aside class="success">
 Remember — a happy kitten is an authenticated kitten!
 </aside> -->
-<h2 id='verificar-orden-de-pago'>Verificar orden de pago</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.compropago.com/v2/orders/ch_c1c0983d-6318-4f65-838c-8ff60afacf18"</span>
-  -u sk_live:pk_live
+<h2 id='verificar-orden-de-pago'>Verificar orden de pago</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.compropago.com/v2/orders/ch_c1c0983d-6318-4f65-838c-8ff60afacf18"</span> <span class="se">\</span>
+-u sk_live_xxxxxxxxxxxxxxxxxx:pk_live_xxxxxxxxxxxxxxxxxx
+</code></pre><pre class="highlight php tab-php"><code><span class="cp">&lt;?php</span>
+<span class="c1"># Obtener el ID de la orden generada anteriormente
+</span><span class="nv">$orderId</span> <span class="o">=</span> <span class="nv">$order</span><span class="p">[</span><span class="s1">'data'</span><span class="p">][</span><span class="s1">'id'</span><span class="p">];</span>
+
+<span class="c1"># Llamada al método del API para recuperar la información de la orden de pago
+</span><span class="nv">$verified</span> <span class="o">=</span> <span class="nv">$compropagoSpei</span><span class="o">-&gt;</span><span class="na">verifyOrder</span><span class="p">(</span><span class="nv">$orderId</span><span class="p">);</span>
+</code></pre><pre class="highlight ruby tab-ruby"><code><span class="c1"># Obtener el ID de la orden generada anteriormente</span>
+<span class="n">order_id</span> <span class="o">=</span> <span class="n">order</span><span class="p">.</span><span class="nf">data</span><span class="p">.</span><span class="nf">id</span>
+
+<span class="c1"># Llamada al método del API para recuperar la información de la orden de pago</span>
+<span class="n">verified</span> <span class="o">=</span> <span class="n">client</span><span class="p">.</span><span class="nf">verify_order</span><span class="p">(</span><span class="n">order_id</span><span class="p">)</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="c"># Obtener el ID de la orden generada anteriormente</span>
+<span class="n">order_id</span> <span class="o">=</span> <span class="n">order</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="nb">id</span>
+
+<span class="c"># Llamada al método del API para recuperar la información de la orden de pago</span>
+<span class="n">verified</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">verify_order</span><span class="p">(</span><span class="n">order_id</span><span class="p">)</span>
+</code></pre><pre class="highlight csharp tab-csharp"><code><span class="c1">// Obtener el ID de la orden generada anteriormente</span>
+<span class="kt">var</span> <span class="n">order_id</span> <span class="p">=</span> <span class="n">order</span><span class="p">.</span><span class="n">data</span><span class="p">.</span><span class="n">id</span><span class="p">;</span>
+
+<span class="c1">// Llamada al método del API para recuperar la información de la orden de pago</span>
+<span class="kt">var</span> <span class="n">verified</span> <span class="p">=</span> <span class="n">client</span><span class="p">.</span><span class="nf">VerifyOrder</span><span class="p">(</span><span class="n">order_id</span><span class="p">);</span>
+</code></pre><pre class="highlight java tab-java"><code><span class="c1">// Obtener el ID de la orden generada anteriormente</span>
+<span class="n">String</span> <span class="n">order_id</span> <span class="o">=</span> <span class="n">order</span><span class="o">.</span><span class="na">data</span><span class="o">.</span><span class="na">id</span><span class="o">;</span>
+
+<span class="c1">// Llamada al método del API para recuperar la información de la orden de pago</span>
+<span class="n">Order</span> <span class="n">verified</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">VerifyOrder</span><span class="o">(</span><span class="n">order_id</span><span class="o">);</span>
+</code></pre><pre class="highlight javascript tab-javascript"><code>
 </code></pre>
 <blockquote>
 <p>El comando anterior regresa el JSON estructurado de la siguiente manera:</p>
@@ -522,21 +714,105 @@ Remember — a happy kitten is an authenticated kitten!
 <td>Requerido. Id de la orden de pago generada.</td>
 </tr>
 </tbody></table>
-<h2 id='crear-cuenta-clabe'>Crear cuenta CLABE</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.compropago.com/v2/createClabe"</span>
--u sk_live:pk_live <span class="se">\</span>
+<h2 id='crear-cuenta-clabe'>Crear cuenta CLABE</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.compropago.com/v2/createClabe"</span> <span class="se">\</span>
+-u sk_live_xxxxxxxxxxxxxxxxxx:pk_live_xxxxxxxxxxxxxxxxxx <span class="se">\</span>
 -X POST <span class="se">\</span>
 -d <span class="s1">'{
-      "customer":{
+        "customer": {
             "id": "1",
             "email": "customer@email.com",
             "phone": "5555555555"
         },
-        "payment":{
+        "payment": {
             "frecuency": "unlimited",
             "exp_date": null,
             "amount": null
         }
-    }'</span> 
+    }'</span>
+</code></pre><pre class="highlight php tab-php"><code><span class="cp">&lt;?php</span>
+<span class="c1"># Arreglo con información de la CLABE
+</span><span class="nv">$clabe_information</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">"customer"</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="s2">"id"</span> <span class="o">=&gt;</span> <span class="s2">"1"</span><span class="p">,</span>
+        <span class="s2">"email"</span> <span class="o">=&gt;</span> <span class="s2">"customer@email.com"</span><span class="p">,</span>
+        <span class="s2">"phone"</span> <span class="o">=&gt;</span> <span class="s2">"5555555555"</span>
+    <span class="p">],</span>
+    <span class="s2">"payment"</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="s2">"frecuency"</span> <span class="o">=&gt;</span> <span class="s2">"unlimited"</span><span class="p">,</span>
+        <span class="s2">"exp_date"</span> <span class="o">=&gt;</span> <span class="kc">null</span><span class="p">,</span>
+        <span class="s2">"amount"</span> <span class="o">=&gt;</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="p">],</span>
+<span class="p">];</span>
+
+<span class="nv">$clabe</span> <span class="o">=</span> <span class="nv">$client</span><span class="o">-&gt;</span><span class="na">create_clabe</span><span class="p">(</span><span class="nv">$clabe_information</span><span class="p">);</span>
+</code></pre><pre class="highlight ruby tab-ruby"><code><span class="c1"># Arreglo con información de la CLABE</span>
+<span class="n">clabe_information</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="ss">:customer</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="ss">:id</span> <span class="o">=&gt;</span> <span class="s2">"1"</span><span class="p">,</span>
+        <span class="ss">:email</span> <span class="o">=&gt;</span> <span class="s2">"customer@email.com"</span><span class="p">,</span>
+        <span class="ss">:phone</span> <span class="o">=&gt;</span> <span class="s2">"5555555555"</span>
+    <span class="p">],</span>
+    <span class="ss">:payment</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="ss">:frecuency</span> <span class="o">=&gt;</span> <span class="s2">"unlimited"</span><span class="p">,</span>
+        <span class="ss">:exp_date</span> <span class="o">=&gt;</span> <span class="no">None</span><span class="p">,</span>
+        <span class="ss">:amount</span> <span class="o">=&gt;</span> <span class="no">None</span>
+    <span class="p">]</span>
+<span class="p">]</span>
+
+<span class="n">clabe</span> <span class="o">=</span> <span class="n">client</span><span class="p">.</span><span class="nf">create_clabe</span><span class="p">(</span><span class="n">clabe_information</span><span class="p">)</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="c"># Diccionario con información de la CLABE</span>
+<span class="n">clabe_information</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">'customer'</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s">'id'</span><span class="p">:</span> <span class="s">'1'</span><span class="p">,</span>
+        <span class="s">'email'</span><span class="p">:</span> <span class="s">'customer@email.com'</span><span class="p">,</span>
+        <span class="s">'phone'</span><span class="p">:</span> <span class="s">'5555555555'</span>
+    <span class="p">},</span>
+    <span class="s">'payment'</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s">'frecuency'</span><span class="p">:</span> <span class="s">'unlimited'</span><span class="p">,</span>
+        <span class="s">'exp_date'</span><span class="p">:</span> <span class="bp">None</span><span class="p">,</span>
+        <span class="s">'amount'</span><span class="p">:</span> <span class="bp">None</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c"># Llamada al método del API</span>
+<span class="n">clabe</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">create_clabe</span><span class="p">(</span><span class="n">clabe_information</span><span class="p">)</span>
+</code></pre><pre class="highlight csharp tab-csharp"><code><span class="c1">// Diccionario con información de la CLABE</span>
+<span class="kt">var</span> <span class="n">clabe_information</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Dictionary</span>
+<span class="p">{</span>
+    <span class="p">{</span>
+        <span class="s">"customer"</span><span class="p">,</span> <span class="p">{</span>
+            <span class="p">{</span> <span class="s">"id"</span><span class="p">:</span> <span class="s">"1"</span> <span class="p">},</span>
+            <span class="p">{</span> <span class="s">"email"</span><span class="p">:</span> <span class="s">"customer@email.com"</span> <span class="p">},</span>
+            <span class="p">{</span> <span class="s">"phone"</span><span class="p">:</span> <span class="s">"5555555555"</span> <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+        <span class="s">"payment"</span><span class="p">,</span> <span class="p">{</span>
+            <span class="p">{</span> <span class="s">"frecuency"</span><span class="p">:</span> <span class="s">"unlimited"</span> <span class="p">},</span>
+            <span class="p">{</span> <span class="s">"exp_date"</span><span class="p">:</span> <span class="k">null</span> <span class="p">},</span>
+            <span class="p">{</span> <span class="s">"amount"</span><span class="p">:</span> <span class="k">null</span> <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="c1">// Llamada al método del API</span>
+<span class="kt">var</span> <span class="n">clabe</span> <span class="p">=</span> <span class="n">client</span><span class="p">.</span><span class="nf">CreateClabe</span><span class="p">(</span><span class="n">clabe_information</span><span class="p">);</span>
+</code></pre><pre class="highlight java tab-java"><code><span class="c1">// Objeto JSON con información de la CLABE</span>
+<span class="n">JSONObject</span> <span class="n">clabe_customer</span> <span class="o">=</span> <span class="k">new</span> <span class="n">JSONObject</span><span class="o">();</span>
+<span class="n">clabe_customer</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"id"</span><span class="o">,</span> <span class="s">"1"</span><span class="o">);</span>
+<span class="n">clabe_customer</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"email"</span><span class="o">,</span> <span class="s">"customer@email.com"</span><span class="o">);</span>
+<span class="n">clabe_customer</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"phone"</span><span class="o">,</span> <span class="s">"5555555555"</span><span class="o">);</span>
+<span class="n">JSONObject</span> <span class="n">clabe_payment</span> <span class="o">=</span> <span class="k">new</span> <span class="n">JSONObject</span><span class="o">();</span>
+<span class="n">clabe_payment</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"frecuency"</span><span class="o">,</span> <span class="s">"unlimited"</span><span class="o">);</span>
+<span class="n">clabe_payment</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"exp_date"</span><span class="o">,</span> <span class="kc">null</span><span class="o">);</span>
+<span class="n">clabe_payment</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"amount"</span><span class="o">,</span> <span class="kc">null</span><span class="o">);</span>
+<span class="n">JSONObject</span> <span class="n">clabe_information</span> <span class="o">=</span> <span class="k">new</span> <span class="n">JSONObject</span><span class="o">();</span>
+<span class="n">clabe_information</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"customer"</span><span class="o">,</span> <span class="n">clabe_customer</span><span class="o">);</span>
+<span class="n">clabe_information</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"payment"</span><span class="o">,</span> <span class="n">clabe_payment</span><span class="o">);</span>
+
+<span class="c1">// Llamada al método del API</span>
+<span class="n">Clabe</span> <span class="n">clabe</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">CreateClabe</span><span class="o">(</span><span class="n">clabe_information</span><span class="o">);</span>
+</code></pre><pre class="highlight javascript tab-javascript"><code>
 </code></pre>
 <blockquote>
 <p>El comando anterior regresa el JSON estructurado de la siguiente manera:</p>
@@ -621,7 +897,7 @@ Remember — a happy kitten is an authenticated kitten!
 <tr>
 <td>frecuency</td>
 <td>string</td>
-<td>Requerido. Opciones: &quot;unlimited&quot; - se recibiran todos los pagos que lleguen a la cuenta CLABE generada.</td>
+<td>Requerido. Opciones: <code>unlimited</code> - se recibiran todos los pagos que lleguen a la cuenta CLABE generada.</td>
 </tr>
 <tr>
 <td>exp_date</td>
@@ -634,12 +910,12 @@ Remember — a happy kitten is an authenticated kitten!
 <td>Opcional. Recepción de pagos solo con el monto configurado</td>
 </tr>
 </tbody></table>
-<h2 id='crear-cuentas-y-subcuentas'>Crear cuentas y subcuentas</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.compropago.com/v2/createAccount"</span>
--u sk_live:pk_live <span class="se">\</span>
+<h2 id='crear-cuentas-y-subcuentas'>Crear cuentas y subcuentas</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.compropago.com/v2/createAccount"</span> <span class="se">\</span>
+-u sk_live_xxxxxxxxxxxxxxxxxx:pk_live_xxxxxxxxxxxxxxxxxx <span class="se">\</span>
 -X POST <span class="se">\</span>
 -d <span class="s1">'{
         "name": "Condominio Polanco",
-        "reference": "001",
+        "id": "001",
         "customer": {
             "id": "101",
             "name": "Departamento_101",
@@ -647,6 +923,78 @@ Remember — a happy kitten is an authenticated kitten!
             "phone": "5555555555"
         }
     }'</span>
+</code></pre><pre class="highlight php tab-php"><code><span class="cp">&lt;?php</span>
+<span class="c1"># Información de la cuenta
+</span><span class="nv">$account_information</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">'name'</span> <span class="o">=&gt;</span> <span class="s1">'Condominio Polanco'</span><span class="p">,</span>
+    <span class="s1">'id'</span> <span class="o">=&gt;</span> <span class="s1">'001'</span><span class="p">,</span>
+    <span class="s1">'customer'</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="s1">'id'</span> <span class="o">=&gt;</span> <span class="s1">'101'</span><span class="p">,</span>
+        <span class="s1">'name'</span> <span class="o">=&gt;</span> <span class="s1">'Departamento_101'</span><span class="p">,</span>
+        <span class="s1">'email'</span> <span class="o">=&gt;</span> <span class="s1">'email@gmail.com'</span><span class="p">,</span>
+        <span class="s1">'phone'</span> <span class="o">=&gt;</span> <span class="s1">'5555555555'</span>
+    <span class="p">],</span>
+<span class="p">];</span>
+
+<span class="c1"># Llamada al método del API
+</span><span class="nv">$account</span> <span class="o">=</span> <span class="nv">$client</span><span class="o">-&gt;</span><span class="na">create_account</span><span class="p">(</span><span class="nv">$account_information</span><span class="p">);</span>
+</code></pre><pre class="highlight ruby tab-ruby"><code><span class="c1"># Arreglo con información de la cuenta</span>
+<span class="n">account_information</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="ss">:name</span> <span class="o">=&gt;</span> <span class="s1">'Condominio Polanco'</span><span class="p">,</span>
+    <span class="ss">:id</span> <span class="o">=&gt;</span> <span class="s1">'001'</span><span class="p">,</span>
+    <span class="ss">:customer</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="ss">:id</span> <span class="o">=&gt;</span> <span class="s1">'101'</span><span class="p">,</span>
+        <span class="ss">:name</span> <span class="o">=&gt;</span> <span class="s1">'Departamento_101'</span><span class="p">,</span>
+        <span class="ss">:email</span> <span class="o">=&gt;</span> <span class="s1">'email@gmail.com'</span><span class="p">,</span>
+        <span class="ss">:phone</span> <span class="o">=&gt;</span> <span class="s1">'5555555555'</span>
+    <span class="p">],</span>
+<span class="p">];</span>
+
+<span class="c1"># Llamada al método del API</span>
+<span class="n">account</span> <span class="o">=</span> <span class="n">client</span><span class="p">.</span><span class="nf">create_account</span><span class="p">(</span><span class="n">account_information</span><span class="p">);</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="c"># Diccionario con información de la cuenta</span>
+<span class="n">account_information</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">'name'</span><span class="p">:</span> <span class="s">'Condominio Polanco'</span><span class="p">,</span>
+    <span class="s">'id'</span><span class="p">:</span> <span class="s">'001'</span><span class="p">,</span>
+    <span class="s">'customer'</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s">'id'</span><span class="p">:</span> <span class="s">'101'</span><span class="p">,</span>
+        <span class="s">'name'</span><span class="p">:</span> <span class="s">'Departamento_101'</span><span class="p">,</span>
+        <span class="s">'email'</span><span class="p">:</span> <span class="s">'email@gmail.com'</span><span class="p">,</span>
+        <span class="s">'phone'</span><span class="p">:</span> <span class="s">'5555555555'</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+
+<span class="c"># Llamada al método del API</span>
+<span class="n">account</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">create_account</span><span class="p">(</span><span class="n">account_information</span><span class="p">)</span>
+</code></pre><pre class="highlight csharp tab-csharp"><code><span class="c1">// Diccionario con información de la cuenta</span>
+<span class="kt">var</span> <span class="n">account_information</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Dictionary</span>
+<span class="p">{</span>
+    <span class="p">{</span> <span class="err">'</span><span class="n">name</span><span class="err">'</span><span class="p">,</span> <span class="err">'</span><span class="n">Condominio</span> <span class="n">Polanco</span><span class="err">'</span> <span class="p">},</span>
+    <span class="p">{</span> <span class="err">'</span><span class="n">id</span><span class="err">'</span><span class="p">,</span> <span class="err">'</span><span class="m">001</span><span class="err">'</span> <span class="p">},</span>
+    <span class="p">{</span><span class="err"> '</span><span class="n">customer</span><span class="err">'</span><span class="p">,</span> <span class="p">{</span>
+        <span class="p">{</span><span class="err"> '</span><span class="n">id</span><span class="err">'</span><span class="p">:</span> <span class="err">'</span><span class="m">101</span><span class="err">'</span> <span class="p">},</span>
+        <span class="p">{</span><span class="err"> '</span><span class="n">name</span><span class="err">'</span><span class="p">:</span> <span class="err">'</span><span class="n">Departamento_101</span><span class="err">'</span> <span class="p">},</span>
+        <span class="p">{</span> <span class="err">'</span><span class="n">email</span><span class="err">'</span><span class="p">:</span> <span class="err">'</span><span class="n">email@gmail</span><span class="p">.</span><span class="n">com</span><span class="err">'</span> <span class="p">},</span>
+        <span class="p">{</span> <span class="err">'</span><span class="n">phone</span><span class="err">'</span><span class="p">:</span> <span class="err">'</span><span class="m">5555555555</span><span class="err">'</span> <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="c1">// Llamada al método del API</span>
+<span class="kt">var</span> <span class="n">account</span> <span class="p">=</span> <span class="n">client</span><span class="p">.</span><span class="nf">CreateAccount</span><span class="p">(</span><span class="n">account_information</span><span class="p">)</span>
+</code></pre><pre class="highlight java tab-java"><code><span class="c1">// Objeto JSON con información de la cuenta</span>
+<span class="n">JSONObject</span> <span class="n">account_customer</span> <span class="o">=</span> <span class="k">new</span> <span class="n">JSONObject</span><span class="o">();</span>
+<span class="n">account_information</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"id"</span><span class="o">,</span> <span class="s">"101"</span><span class="o">);</span>
+<span class="n">account_information</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"name"</span><span class="o">,</span> <span class="s">"Departamento_101"</span><span class="o">);</span>
+<span class="n">account_information</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"email"</span><span class="o">,</span> <span class="s">"email@gmail.com"</span><span class="o">);</span>
+<span class="n">account_information</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"phone"</span><span class="o">,</span> <span class="s">"5555555555"</span><span class="o">);</span>
+<span class="n">JSONObject</span> <span class="n">account_information</span> <span class="o">=</span> <span class="k">new</span> <span class="n">JSONObject</span><span class="o">();</span>
+<span class="n">account_information</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"name"</span><span class="o">,</span> <span class="s">"Condominio Polanco"</span><span class="o">);</span>
+<span class="n">account_information</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"id"</span><span class="o">,</span> <span class="s">"001"</span><span class="o">);</span>
+<span class="n">account_information</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"customer"</span><span class="o">,</span> <span class="n">account_customer</span><span class="o">);</span>
+
+<span class="c1">// Llamada al método del API</span>
+<span class="n">Account</span> <span class="n">account</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">CreateAccount</span><span class="o">(</span><span class="n">account_information</span><span class="o">);</span>
+</code></pre><pre class="highlight javascript tab-javascript"><code>
 </code></pre>
 <blockquote>
 <p>El comando anterior regresa el JSON estructurado de la siguiente manera:</p>
@@ -661,7 +1009,7 @@ Remember — a happy kitten is an authenticated kitten!
     </span><span class="s2">"map"</span><span class="p">:</span><span class="w"> </span><span class="s2">"97281aa7-04b0-4cc7-bc7f-e97c7a609f3f"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Condominio Polanco"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"001"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"001"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"customer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
             </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"101"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Departamento_101"</span><span class="p">,</span><span class="w">
@@ -736,10 +1084,18 @@ Remember — a happy kitten is an authenticated kitten!
 <tr>
 <td>phone</td>
 <td>string</td>
-<td>Opcional. Telefono de la subcuenta a la cual se le enviaran las instrucciones de pago vía SMS.</td>
+<td>Opcional. Teléfono de la subcuenta a la cual se le enviaran las instrucciones de pago vía SMS.</td>
 </tr>
 </tbody></table>
-<h2 id='listar-cuentas'>Listar cuentas</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.compropago.com/v2/accounts"</span> -u sk_live:pk_live
+<h2 id='listar-cuentas'>Listar cuentas</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.compropago.com/v2/accounts"</span> <span class="se">\</span>
+-u sk_live_xxxxxxxxxxxxxx:pk_live_xxxxxxxxxxxxxxx
+</code></pre><pre class="highlight php tab-php"><code><span class="cp">&lt;?php</span>
+
+</code></pre><pre class="highlight ruby tab-ruby"><code>
+</code></pre><pre class="highlight python tab-python"><code>
+</code></pre><pre class="highlight csharp tab-csharp"><code>
+</code></pre><pre class="highlight java tab-java"><code>
+</code></pre><pre class="highlight javascript tab-javascript"><code>
 </code></pre>
 <blockquote>
 <p>El comando anterior regresa el JSON estructurado de la siguiente manera:</p>
@@ -774,10 +1130,18 @@ Remember — a happy kitten is an authenticated kitten!
     </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>Listado de cuentas conformadas por id, referencia, nombre y saldo</p>
+<p>Listado de cuentas conformadas por id, referencia, nombre y saldo.</p>
 <h3 id='http-request-5'>HTTP Request</h3>
 <p><code>GET https://api.compropago.com/v2/accounts</code></p>
-<h2 id='listar-subcuentas'>Listar subcuentas</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.compropago.com/v2/accounts/&lt;ID&gt;"</span> -u sk_live:pk_live
+<h2 id='listar-subcuentas'>Listar subcuentas</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.compropago.com/v2/accounts/&lt;ID&gt;"</span> <span class="se">\</span>
+-u sk_live_xxxxxxxxxxxxxx:pk_live_xxxxxxxxxxxxxxx
+</code></pre><pre class="highlight php tab-php"><code><span class="cp">&lt;?php</span>
+
+</code></pre><pre class="highlight ruby tab-ruby"><code>
+</code></pre><pre class="highlight python tab-python"><code>
+</code></pre><pre class="highlight csharp tab-csharp"><code>
+</code></pre><pre class="highlight java tab-java"><code>
+</code></pre><pre class="highlight javascript tab-javascript"><code>
 </code></pre>
 <blockquote>
 <p>El comando anterior regresa el JSON estructurado de la siguiente manera:</p>
@@ -804,10 +1168,10 @@ Remember — a happy kitten is an authenticated kitten!
     </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>Listado de subcuentas conformadas por nombre y CLABE</p>
+<p>Listado de subcuentas conformadas por nombre y CLABE.</p>
 <h3 id='http-request-6'>HTTP Request</h3>
-<p><code>GET https://api.compropago.com/v2/accounts/170</code></p>
-<h3 id='arguments'>Arguments</h3>
+<p><code>GET https://api.compropago.com/v2/accounts/&lt;ID&gt;</code></p>
+<h3 id='url-parameters-2'>URL Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -818,10 +1182,17 @@ Remember — a happy kitten is an authenticated kitten!
 <tr>
 <td>ID</td>
 <td>string</td>
-<td>Requerido. Id de la subcuenta que se quiere consultar</td>
+<td>Requerido. Id de la subcuenta que se quiere consultar.</td>
 </tr>
 </tbody></table>
-<h2 id='listar-transacciones-recibidas-en-la-subcuenta'>Listar transacciones recibidas en la subcuenta</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.compropago.com/v2/accounts/&lt;ID&gt;/transactions?clabe=&lt;CLABE&gt;"</span> -u sk_live:pk_live
+<h2 id='listar-transacciones-recibidas-en-la-subcuenta'>Listar transacciones recibidas en la subcuenta</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.compropago.com/v2/accounts/&lt;ID&gt;/transactions?clabe=&lt;CLABE&gt;"</span> <span class="se">\</span>
+-u sk_live_xxxxxxxxxxxxxx:pk_live_xxxxxxxxxxxxxxx
+</code></pre><pre class="highlight php tab-php"><code><span class="cp">&lt;?php</span>
+</code></pre><pre class="highlight ruby tab-ruby"><code>
+</code></pre><pre class="highlight python tab-python"><code>
+</code></pre><pre class="highlight csharp tab-csharp"><code>
+</code></pre><pre class="highlight java tab-java"><code>
+</code></pre><pre class="highlight javascript tab-javascript"><code>
 </code></pre>
 <blockquote>
 <p>El comando anterior regresa el JSON estructurado de la siguiente manera:</p>
@@ -850,7 +1221,7 @@ Remember — a happy kitten is an authenticated kitten!
             </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"paid"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Comisión en % por operación"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"085903161360320595"</span><span class="w">
-        </span><span class="p">},</span><span class="w">        
+        </span><span class="p">},</span><span class="w">
         </span><span class="p">{</span><span class="w">
             </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"935adeb9-9513-487c-a07c-25a5a32f42e9"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1564003560"</span><span class="p">,</span><span class="w">
@@ -870,10 +1241,10 @@ Remember — a happy kitten is an authenticated kitten!
     </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>Listado de transacciones recibidas en la subcuenta, filtradas por la CLABE</p>
+<p>Listado de transacciones recibidas en la subcuenta, filtradas por la CLABE.</p>
 <h3 id='http-request-7'>HTTP Request</h3>
 <p><code>GET https://api.compropago.com/v2/accounts/&lt;ID&gt;/transactions?clabe=&lt;CLABE&gt;</code></p>
-<h3 id='arguments-2'>Arguments</h3>
+<h3 id='url-parameters-3'>URL Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -884,12 +1255,12 @@ Remember — a happy kitten is an authenticated kitten!
 <tr>
 <td>ID</td>
 <td>string</td>
-<td>Requerido. Id de la subcuenta que se quiere consultar</td>
+<td>Requerido. Id de la subcuenta que se quiere consultar.</td>
 </tr>
 <tr>
 <td>CLABE</td>
 <td>string</td>
-<td>Opcional. Filtro para consultar las transaccions por cuenta CLABE</td>
+<td>Opcional. Filtro para consultar las transaccions por cuenta CLABE.</td>
 </tr>
 </tbody></table>
 <h1 id='errores'>Errores</h1>
@@ -901,51 +1272,63 @@ This error section is stored in a separate file in <code>includes/_errors.md</co
 <tr>
 <th>Error Code</th>
 <th>Meaning</th>
+<th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>400</td>
-<td>Bad Request -- Your request is invalid.</td>
+<td>Bad Request</td>
+<td>Your request is invalid.</td>
 </tr>
 <tr>
 <td>401</td>
-<td>Unauthorized -- Your API key is wrong.</td>
+<td>Unauthorized</td>
+<td>Your API key is wrong.</td>
 </tr>
 <tr>
 <td>403</td>
-<td>Forbidden -- The compropago requested is hidden for administrators only.</td>
+<td>Forbidden</td>
+<td>The compropago requested is hidden for administrators only.</td>
 </tr>
 <tr>
 <td>404</td>
-<td>Not Found -- The specified compropago could not be found.</td>
+<td>Not Found</td>
+<td>The specified compropago could not be found.</td>
 </tr>
 <tr>
 <td>405</td>
-<td>Method Not Allowed -- You tried to access a compropago with an invalid method.</td>
+<td>Method Not Allowed</td>
+<td>You tried to access a compropago with an invalid method.</td>
 </tr>
 <tr>
 <td>406</td>
-<td>Not Acceptable -- You requested a format that isn&#39;t json.</td>
+<td>Not Acceptable</td>
+<td>You requested a format that isn&#39;t json.</td>
 </tr>
 <tr>
 <td>410</td>
-<td>Gone -- The compropago requested has been removed from our servers.</td>
+<td>Gone</td>
+<td>The compropago requested has been removed from our servers.</td>
 </tr>
 <tr>
 <td>418</td>
 <td>I&#39;m a teapot.</td>
+<td></td>
 </tr>
 <tr>
 <td>429</td>
-<td>Too Many Requests -- You&#39;re requesting too many compropago! Slow down!</td>
+<td>Too Many Requests</td>
+<td>You&#39;re requesting too many compropago! Slow down!.</td>
 </tr>
 <tr>
 <td>500</td>
-<td>Internal Server Error -- We had a problem with our server. Try again later.</td>
+<td>Internal Server Error</td>
+<td>We had a problem with our server. Try again later.</td>
 </tr>
 <tr>
 <td>503</td>
-<td>Service Unavailable -- We&#39;re temporarily offline for maintenance. Please try again later.</td>
+<td>Service Unavailable</td>
+<td>We&#39;re temporarily offline for maintenance. Please try again later.</td>
 </tr>
 </tbody></table>
 
@@ -953,8 +1336,11 @@ This error section is stored in a separate file in <code>includes/_errors.md</co
       <div class="dark-box">
           <div class="lang-selector">
                 <a href="#" data-language-name="shell">shell</a>
+                <a href="#" data-language-name="php">php</a>
                 <a href="#" data-language-name="ruby">ruby</a>
                 <a href="#" data-language-name="python">python</a>
+                <a href="#" data-language-name="csharp">csharp</a>
+                <a href="#" data-language-name="java">java</a>
                 <a href="#" data-language-name="javascript">javascript</a>
           </div>
       </div>
