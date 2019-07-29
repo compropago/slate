@@ -37,21 +37,21 @@ curl "api_endpoint_here" \
 
 ```php
 <?php
-# Using SDK-PHP
+# Using SPEI-SDK for PHP
 require 'vendor/autoload.php';
 
-# Importar objeto Spei
-use SpeiSdk\Resources\Payments\Spei;
+# Importar objeto Client
+use SpeiSdk\Client;
 
 # Configuración de las llaves de SPEI en el cliente
-$client = (new Spei)->withKeys(
+$client = new Client(
     'pk_live_xxxxxxxxxxxxxxxxxx',
     'sk_live_xxxxxxxxxxxxxxxxxx'
 );
 ```
 
 ```ruby
-# Using SDK-Ruby
+# Using SPEI-SDK for Ruby
 require 'spei_sdk'
 
 # Configuración de las llaves de SPEI en el cliente
@@ -62,8 +62,8 @@ client = Client.new(
 ```
 
 ```python
-# Using SDK-Python
-from spei_sdk.resources.payments import Spei
+# Using SPEI-SDK for Python
+from spei_sdk import Client
 
 # Configuración de las llaves de SPEI en el cliente
 client = Spei(
@@ -73,7 +73,7 @@ client = Spei(
 ```
 
 ```csharp
-// Using SDK-C# .NET
+// Using SPEI-SDK for C# .Net
 using SpeiSdk;
 
 // Configuración de las llaves de SPEI en el cliente
@@ -84,8 +84,8 @@ var client = new Spei(
 ```
 
 ```java
-// Using SDK-Java
-import speisdk.*;
+// Using SPEI-SDK for Java
+import speisdk.Client;
 
 // Configuración de las llaves de SPEI en el cliente
 Client client = new Client(
@@ -395,7 +395,7 @@ verified = client.verify_order(order_id)
 
 ```csharp
 // Obtener el ID de la orden generada anteriormente
-var order_id = order.data.id;
+string order_id = order.data.id;
 
 // Llamada al método del API para recuperar la información de la orden de pago
 var verified = client.VerifyOrder(order_id);
@@ -849,23 +849,28 @@ curl "https://api.compropago.com/v2/accounts" \
 
 ```php
 <?php
-
+# Llamada al método del API
+$accounts = $client->accounts->getAll();
 ```
 
 ```ruby
-
+# Llamada al método del API
+accounts = client.accounts.getAll()
 ```
 
 ```python
-
+# Llamada al método del API
+accounts = client.accounts.get_all()
 ```
 
 ```csharp
-
+// Llamada al método del API
+accounts = client.Accounts.GetAll();
 ```
 
 ```java
-
+// Llamada al método del API
+Account accounts = client.accounts.GetAll();
 ```
 
 ```javascript
@@ -921,23 +926,43 @@ curl "https://api.compropago.com/v2/accounts/<ID>" \
 
 ```php
 <?php
+# ID
+$id = '170';
 
+# Llamada al método del API
+$sub_accounts = $client->accounts->get($id);
 ```
 
 ```ruby
+# ID
+id = '170'
 
+# Llamada al método del API
+sub_accounts = client.accounts.get(id)
 ```
 
 ```python
+# ID
+id = '170'
 
+# Llamada al método del API
+sub_accounts = client.accounts.get(id)
 ```
 
 ```csharp
+// ID
+string id = '170';
 
+// Llamada al método del API
+var sub_accounts = client.Accounts.Get(id);
 ```
 
 ```java
+// ID
+String id = '170';
 
+// Llamada al método del API
+SubAccount sub_accounts = client.accounts.get(id);
 ```
 
 ```javascript
@@ -991,22 +1016,48 @@ curl "https://api.compropago.com/v2/accounts/<ID>/transactions?clabe=<CLABE>" \
 
 ```php
 <?php
+# ID
+$id = '170';
+$clabe = '002180123123123123';
+
+# Llamada al método del API
+$transactions = $client->accounts->transactions($id, $clabe);
 ```
 
 ```ruby
+# ID
+id = '170'
+clabe = '002180123123123123'
 
+# Llamada al método del API
+transactions = client.accounts.transactions(id, clabe)
 ```
 
 ```python
+# ID
+id = '170'
+clabe = '002180123123123123'
 
+# Llamada al método del API
+transactions = client.accounts.transactions(id, clabe)
 ```
 
 ```csharp
+// ID
+string id = '170';
+string clabe = '002180123123123123';
 
+// Llamada al método del API
+var transactions = client.Accounts.Transactions(id, clabe);
 ```
 
 ```java
+// ID
+String id = '170';
+String clabe = '002180123123123123';
 
+// Llamada al método del API
+Transaction transactions = client.accounts.transactions(id, clabe);
 ```
 
 ```javascript
