@@ -333,7 +333,7 @@ frecuency | string | Requerido. Opciones: "unlimited" - se recibiran todos los p
 exp_date | epoch | Opcional. Fecha de expiración para la recepción de pagos en esta cuenta CLABE
 amount | float | Opcional. Recepción de pagos solo con el monto configurado
 
-## Crear cuentas con CLABE
+## Crear cuentas y subcuentas
 
 ```shell
 curl "https://api.compropago.com/v2/createAccount"
@@ -341,7 +341,7 @@ curl "https://api.compropago.com/v2/createAccount"
 -X POST \
 -d '{
         "name": "Condominio Polanco",
-        "id": "001",
+        "reference": "001",
         "customer": {
             "id": "101",
             "name": "Departamento_101",
@@ -364,7 +364,7 @@ curl "https://api.compropago.com/v2/createAccount"
     "map": "97281aa7-04b0-4cc7-bc7f-e97c7a609f3f",
     "data": {
         "name": "Condominio Polanco",
-        "id": "001",
+        "reference": "001",
         "customer": {
             "id": "101",
             "name": "Departamento_101",
@@ -396,7 +396,7 @@ curl "https://api.compropago.com/v2/createAccount"
 }
 ```
 
-Generación de cuentas y subcuentas ligadas a una CLABE para el abono de depositos mediant SPEI.
+Generación de cuentas y subcuentas ligadas a una CLABE para el abono de depósitos mediante SPEI.
 
 ### HTTP Request
 
@@ -407,8 +407,170 @@ Generación de cuentas y subcuentas ligadas a una CLABE para el abono de deposit
 Parameter | Type | Description
 --------- | ------- | -----------
 name | string | Requerido. Nombre de la cuenta.
-id | string | Requerido. Identificador de la cuenta.
-customer | object | Requerido. Objeto de la información del cliente o subcuenta.
-name | string | Requerido. Nombre del cliente o subcuenta.
-email | string | Requerido. Email del cliente o subcuenta, se le enviara un correo con la generación de la cuenta CLABE.
-phone | string | Opcional. Telefono del cliente o subcuenta donde enviaremos las instrucciones de pago por SMS.
+reference | string | Requerido. Identificador de la cuenta, tiene que ser único por cuenta.
+customer | object | Requerido. Objeto de la información de la subcuenta.
+id | string | Requerido. Identificador de la subcuenta, tiene que ser único por subcuenta.
+name | string | Requerido. Nombre de subcuenta.
+email | string | Requerido. Email de subcuenta, se le enviara un correo con la generación de la cuenta CLABE.
+phone | string | Opcional. Telefono de la subcuenta a la cual se le enviaran las instrucciones de pago vía SMS.
+
+
+## Listar cuentas
+
+```shell
+curl "https://api.compropago.com/v2/accounts" -u sk_live:pk_live
+```
+
+> El comando anterior regresa el JSON estructurado de la siguiente manera:
+
+```json
+{
+    "object": "orders.get_accounts",
+    "code": 200,
+    "status": "success",
+    "message": "success.get_accounts",
+    "request": 1563056627957,
+    "url": "/v2/accounts",
+    "map": "68d68437-4dc2-4381-bfea-8e3cd86c03f7",
+    "data": [
+        {
+            "id": 169,
+            "reference": "1-005",
+            "name": "Condominio Candelaria",
+            "balance": 0
+        },
+        {
+            "id": 162,
+            "reference": "1-001",
+            "name": "Condominio Coyoacan",
+            "balance": 0
+        },
+        {
+            "id": 170,
+            "reference": "1-006",
+            "name": "Condominio Obrera",
+            "balance": 0
+        }
+    ]
+}
+```
+
+Listado de cuentas conformadas por id, referencia, nombre y saldo
+
+### HTTP Request
+
+`GET https://api.compropago.com/v2/accounts`
+
+
+## Listar subcuentas
+
+```shell
+curl "https://api.compropago.com/v2/accounts/<ID>" -u sk_live:pk_live
+```
+
+> El comando anterior regresa el JSON estructurado de la siguiente manera:
+
+```json
+{
+    "object": "orders.get_account",
+    "code": 200,
+    "status": "success",
+    "message": "success.get_account",
+    "request": 1563057051977,
+    "url": "/v2/accounts/170",
+    "map": "b5f76f16-76dd-471b-ad85-abb1834e3acf",
+    "data": [
+        {
+            "id": 170,
+            "name": "Departamento_101",
+            "clabe": "646180146400237132"
+        },
+        {
+            "id": 170,
+            "name": "Departamento_102",
+            "clabe": "646180146400237145"
+        }
+    ]
+}
+```
+
+Listado de subcuentas conformadas por nombre y CLABE
+
+### HTTP Request
+
+`GET https://api.compropago.com/v2/accounts/170`
+
+### Arguments
+
+Parameter | Type | Description
+--------- | ---- | -----------
+ID | string | Requerido. Id de la subcuenta que se quiere consultar
+
+
+## Listar transacciones recibidas en la subcuenta
+
+```shell
+curl "https://api.compropago.com/v2/accounts/<ID>/transactions?clabe=<CLABE>" -u sk_live:pk_live
+```
+
+> El comando anterior regresa el JSON estructurado de la siguiente manera:
+
+```json
+{
+    "object": "orders.get_transactions",
+    "code": 200,
+    "status": "success",
+    "message": "success.get_transactions",
+    "request": 1564093161840,
+    "url": "/v2/accounts/186/transactions",
+    "map": "a018844d-5bc9-43aa-b9e4-2dfd65ce7353",
+    "data": [
+        {
+            "id": "b079d0fe-7719-4ffd-a899-46044410d940",
+            "date": "1564003560",
+            "amount": 10,
+            "status": "paid",
+            "description": "Abono",
+            "reference": "085903161360320595"
+        },
+        {
+            "id": "a12200d1-1395-43ef-a12f-7854ca5ef146",
+            "date": "1564003560",
+            "amount": -0.1,
+            "status": "paid",
+            "description": "Comisión en % por operación",
+            "reference": "085903161360320595"
+        },        
+        {
+            "id": "935adeb9-9513-487c-a07c-25a5a32f42e9",
+            "date": "1564003560",
+            "amount": -8,
+            "status": "paid",
+            "description": "Comisión fija por operación",
+            "reference": "085903161360320595"
+        },
+        {
+            "id": "821cef90-6644-4d3d-8b09-945a19bb69c9",
+            "date": "1564003560",
+            "amount": -0.15,
+            "status": "paid",
+            "description": "Comisión en % por operación",
+            "reference": "085903161360320595"
+        }
+    ]
+}
+```
+
+Listado de transacciones recibidas en la subcuenta, filtradas por la CLABE
+
+### HTTP Request
+
+`GET https://api.compropago.com/v2/accounts/<ID>/transactions?clabe=<CLABE>`
+
+### Arguments
+
+Parameter | Type | Description
+--------- | ---- | -----------
+ID | string | Requerido. Id de la subcuenta que se quiere consultar
+CLABE | string | Opcional. Filtro para consultar las transaccions por cuenta CLABE
+
