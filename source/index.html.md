@@ -678,12 +678,20 @@ curl "https://api.compropago.com/v2/createAccount" \
 -d '{
         "name": "Condominio Polanco",
         "reference": "001",
-        "customer": {
-            "id": "101",
-            "name": "Departamento_101",
-            "email": "email@gmail.com",
-            "phone": "5555555555"
-        }
+        "customers":[ 
+            {
+                "id": "101",
+                "name": "Departamento_101",
+                "email": "email@gmail.com",
+                "phone": "5555555555"
+            },
+            {
+                "id": "102",
+                "name": "Departamento_102",
+                "email": "email@hotmail.com",
+                "phone": "5555555555"
+            }
+        ]
     }'
 ```
 
@@ -791,29 +799,36 @@ Account account = client.CreateAccount(account_information);
     "data": {
         "name": "Condominio Polanco",
         "reference": "001",
-        "customer": {
-            "id": "101",
-            "name": "Departamento_101",
-            "email": "email@gmail.com",
-            "phone": "5555555555"
-        },
-        "payment": {
-            "clabe": "646180146400231992",
-            "instructions": [
-                {
-                    "step": 1,
-                    "description": "Agrégala en tu banca en línea seleccionando como banco: STP."
-                },
-                {
-                    "step": 2,
-                    "description": "Realiza transferencias a cualquier hora por los montos que desees."
-                },
-                {
-                    "step": 3,
-                    "description": "Por cada operación exitosa recibirás un comprobante de la transacción."
-                }
-            ]
-        },
+        "customers": [
+            {
+                "id": "101",
+                "name": "Departamento_101",
+                "email": "email@gmail.com",
+                "phone": "5555555555",
+                "clabe": "646180146400231992"
+            },
+            {
+                "id": "102",
+                "name": "Departamento_102",
+                "email": "email@gmail.com",
+                "phone": "5555555555",
+                "clabe": "646180146400252269"
+            }
+        ],          
+        "instructions": [
+            {
+                "step": 1,
+                "description": "Agrégala en tu banca en línea seleccionando como banco: STP."
+            },
+            {
+                "step": 2,
+                "description": "Realiza transferencias a cualquier hora por los montos que desees."
+            },
+            {
+                "step": 3,
+                "description": "Por cada operación exitosa recibirás un comprobante de la transacción."
+            }
+        ],
         "status": "ACTIVE",
         "testMode": false,
         "createdAt": 1561416434,
@@ -834,7 +849,7 @@ Parameter | Type | Description
 --------- | ------- | -----------
 name | string | Requerido. Nombre de la cuenta.
 reference | string | Requerido. Identificador de la cuenta, tiene que ser único por cuenta.
-customer | object | Requerido. Objeto de la información de la subcuenta.
+customers | array | Requerido. Arreglo de subcuentas.
 id | string | Requerido. Identificador de la subcuenta, tiene que ser único por subcuenta.
 name | string | Requerido. Nombre de subcuenta.
 email | string | Requerido. Email de subcuenta, se le enviara un correo con la generación de la cuenta CLABE.
