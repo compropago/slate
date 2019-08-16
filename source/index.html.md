@@ -94,10 +94,6 @@ Client client = new Client(
 );
 ```
 
-```javascript
-
-```
-
 > Asegurate de remplazar `sk_live_xxxxxxxxxxxxxxxxxx:pk_live_xxxxxxxxxxxxxxxxxx` por tus llaves del API.
 
 Ponemos a tu disposición dos pares de llaves -API Keys- en la sección [panel/configuración](https://panel.compropago.com/panel/configuracion), con ellas puedes interactuar con nuestro sistema en sus diferentes modos de operación.
@@ -262,10 +258,6 @@ order_information.put("expiresAt", System.currentTimeMillis()/1000 + (2*60*60*24
 Order order = client.CreateOrder(order_information);
 ```
 
-```javascript
-
-```
-
 > The above command returns JSON structured like this:
 
 ```json
@@ -407,10 +399,6 @@ String order_id = order.data.id;
 
 // Llamada al método del API para recuperar la información de la orden de pago
 Order verified = client.VerifyOrder(order_id);
-```
-
-```javascript
-
 ```
 
 > El comando anterior regresa el JSON estructurado de la siguiente manera:
@@ -601,10 +589,6 @@ clabe_information.put("payment", clabe_payment);
 Clabe clabe = client.CreateClabe(clabe_information);
 ```
 
-```javascript
-
-```
-
 > El comando anterior regresa el JSON estructurado de la siguiente manera:
 
 ```json
@@ -678,7 +662,7 @@ curl "https://api.compropago.com/v2/createAccount" \
 -d '{
         "name": "Condominio Polanco",
         "reference": "001",
-        "customers":[ 
+        "customers":[
             {
                 "id": "101",
                 "name": "Departamento_101",
@@ -701,11 +685,19 @@ curl "https://api.compropago.com/v2/createAccount" \
 $account_information = [
     'name' => 'Condominio Polanco',
     'reference' => '001',
-    'customer' => [
-        'id' => '101',
-        'name' => 'Departamento_101',
-        'email' => 'email@gmail.com',
-        'phone' => '5555555555'
+    'customers' => [
+        [
+            'id' => '101',
+            'name' => 'Departamento_101',
+            'email' => 'email@gmail.com',
+            'phone' => '5555555555'
+        ],
+        [
+            'id' => '102',
+            'name' => 'Departamento_102',
+            'email' => 'email@gmail.com',
+            'phone' => '5555555555'
+        ],
     ],
 ];
 
@@ -718,11 +710,19 @@ $account = $client->create_account($account_information);
 account_information = [
     :name => 'Condominio Polanco',
     :reference => '001',
-    :customer => [
-        :id => '101',
-        :name => 'Departamento_101',
-        :email => 'email@gmail.com',
-        :phone => '5555555555'
+    :customers => [
+        [
+            :id => '101',
+            :name => 'Departamento_101',
+            :email => 'email@gmail.com',
+            :phone => '5555555555'
+        ],
+        [
+            :id => '102',
+            :name => 'Departamento_102',
+            :email => 'email@gmail.com',
+            :phone => '5555555555'
+        ]
     ],
 ];
 
@@ -735,11 +735,19 @@ account = client.create_account(account_information);
 account_information = {
     'name': 'Condominio Polanco',
     'reference': '001',
-    'customer': [
-        'id': '101',
-        'name': 'Departamento_101',
-        'email': 'email@gmail.com',
-        'phone': '5555555555'
+    'customers': [
+        {
+            'id': '101',
+            'name': 'Departamento_101',
+            'email': 'email@gmail.com',
+            'phone': '5555555555'
+        },
+        {
+            'id': '102',
+            'name': 'Departamento_102',
+            'email': 'email@gmail.com',
+            'phone': '5555555555'
+        }
     ]
 }
 
@@ -753,7 +761,7 @@ var account_information = new Dictionary
 {
     { 'name', 'Condominio Polanco' },
     { 'reference', '001' },
-    { 'customer', {
+    { 'customers', {
         { 'id': '101' },
         { 'name': 'Departamento_101' },
         { 'email': 'email@gmail.com' },
@@ -767,7 +775,7 @@ var account = client.CreateAccount(account_information)
 
 ```java
 // Objeto JSON con información de la cuenta
-JSONObject account_customer = new JSONObject();
+JSONObject account_customers = new JSONObject();
 account_information.put("id", "101");
 account_information.put("name", "Departamento_101");
 account_information.put("email", "email@gmail.com");
@@ -775,14 +783,10 @@ account_information.put("phone", "5555555555");
 JSONObject account_information = new JSONObject();
 account_information.put("name", "Condominio Polanco");
 account_information.put("reference", "001");
-account_information.put("customer", account_customer);
+account_information.put("customers", account_customers);
 
 // Llamada al método del API
 Account account = client.CreateAccount(account_information);
-```
-
-```javascript
-
 ```
 
 > El comando anterior regresa el JSON estructurado de la siguiente manera:
@@ -888,9 +892,6 @@ accounts = client.Accounts.GetAll();
 Account accounts = client.accounts.GetAll();
 ```
 
-```javascript
-```
-
 > El comando anterior regresa el JSON estructurado de la siguiente manera:
 
 ```json
@@ -977,9 +978,6 @@ String id = '170';
 
 // Llamada al método del API
 SubAccount sub_accounts = client.accounts.get(id);
-```
-
-```javascript
 ```
 
 > El comando anterior regresa el JSON estructurado de la siguiente manera:
@@ -1071,9 +1069,6 @@ String clabe = '002180123123123123';
 
 // Llamada al método del API
 Transaction transactions = client.accounts.transactions(id, clabe);
-```
-
-```javascript
 ```
 
 > El comando anterior regresa el JSON estructurado de la siguiente manera:
