@@ -677,16 +677,16 @@ curl "https://api.compropago.com/v2/createAccount" \
 -X POST \
 -d '{
         "name": "Condominio Polanco",
-        "reference": "001",
+        "accountId": "ae3d2531-ac31-406b-86dc-fjzwe8212h",
         "customers":[ 
             {
-                "id": "101",
+                "id": "ae3d2531-ac31-3292sd-23sdja-823j",
                 "name": "Departamento_101",
                 "email": "email@gmail.com",
                 "phone": "5555555555"
             },
             {
-                "id": "102",
+                "id": "kdsakdas-823jasd-823jsa-923kaas",
                 "name": "Departamento_102",
                 "email": "email@hotmail.com",
                 "phone": "5555555555"
@@ -700,9 +700,9 @@ curl "https://api.compropago.com/v2/createAccount" \
 # Información de la cuenta
 $account_information = [
     'name' => 'Condominio Polanco',
-    'reference' => '001',
+    'accountId' => 'ae3d2531-ac31-406b-86dc-fjzwe8212h',
     'customer' => [
-        'id' => '101',
+        'id' => 'ae3d2531-ac31-3292sd-23sdja-823j',
         'name' => 'Departamento_101',
         'email' => 'email@gmail.com',
         'phone' => '5555555555'
@@ -717,9 +717,9 @@ $account = $client->create_account($account_information);
 # Arreglo con información de la cuenta
 account_information = [
     :name => 'Condominio Polanco',
-    :reference => '001',
+    :accountId => 'ae3d2531-ac31-406b-86dc-fjzwe8212h',
     :customer => [
-        :id => '101',
+        :id => 'ae3d2531-ac31-3292sd-23sdja-823j',
         :name => 'Departamento_101',
         :email => 'email@gmail.com',
         :phone => '5555555555'
@@ -734,9 +734,9 @@ account = client.create_account(account_information);
 # Diccionario con información de la cuenta
 account_information = {
     'name': 'Condominio Polanco',
-    'reference': '001',
+    'accountId': 'ae3d2531-ac31-406b-86dc-fjzwe8212h',
     'customer': [
-        'id': '101',
+        'id': 'ae3d2531-ac31-3292sd-23sdja-823j',
         'name': 'Departamento_101',
         'email': 'email@gmail.com',
         'phone': '5555555555'
@@ -752,9 +752,9 @@ account = client.create_account(account_information)
 var account_information = new Dictionary
 {
     { 'name', 'Condominio Polanco' },
-    { 'reference', '001' },
+    { 'accountId', 'ae3d2531-ac31-406b-86dc-fjzwe8212h' },
     { 'customer', {
-        { 'id': '101' },
+        { 'id': 'ae3d2531-ac31-3292sd-23sdja-823j' },
         { 'name': 'Departamento_101' },
         { 'email': 'email@gmail.com' },
         { 'phone': '5555555555' }
@@ -768,13 +768,13 @@ var account = client.CreateAccount(account_information)
 ```java
 // Objeto JSON con información de la cuenta
 JSONObject account_customer = new JSONObject();
-account_information.put("id", "101");
+account_information.put("id", "ae3d2531-ac31-3292sd-23sdja-823j");
 account_information.put("name", "Departamento_101");
 account_information.put("email", "email@gmail.com");
 account_information.put("phone", "5555555555");
 JSONObject account_information = new JSONObject();
 account_information.put("name", "Condominio Polanco");
-account_information.put("reference", "001");
+account_information.put("accountId", "ae3d2531-ac31-406b-86dc-fjzwe8212h");
 account_information.put("customer", account_customer);
 
 // Llamada al método del API
@@ -798,17 +798,17 @@ Account account = client.CreateAccount(account_information);
     "map": "97281aa7-04b0-4cc7-bc7f-e97c7a609f3f",
     "data": {
         "name": "Condominio Polanco",
-        "reference": "001",
+        "accountId": "ae3d2531-ac31-406b-86dc-fjzwe8212h",
         "customers": [
             {
-                "id": "101",
+                "id": "ae3d2531-ac31-3292sd-23sdja-823j",
                 "name": "Departamento_101",
                 "email": "email@gmail.com",
                 "phone": "5555555555",
                 "clabe": "646180146400231992"
             },
             {
-                "id": "102",
+                "id": "kdsakdas-823jasd-823jsa-923kaas",
                 "name": "Departamento_102",
                 "email": "email@gmail.com",
                 "phone": "5555555555",
@@ -848,7 +848,7 @@ Generación de cuentas y subcuentas ligadas a una CLABE para el abono de depósi
 Parameter | Type | Description
 --------- | ------- | -----------
 name | string | Requerido. Nombre de la cuenta.
-reference | string | Requerido. Identificador de la cuenta, tiene que ser único por cuenta.
+accountId | string | Requerido. Identificador de la cuenta, tiene que ser único por cuenta.
 customers | array | Requerido. Arreglo de subcuentas.
 id | string | Requerido. Identificador de la subcuenta, tiene que ser único por subcuenta.
 name | string | Requerido. Nombre de subcuenta.
@@ -904,21 +904,18 @@ Account accounts = client.accounts.GetAll();
     "map": "68d68437-4dc2-4381-bfea-8e3cd86c03f7",
     "data": [
         {
-            "id": 169,
-            "reference": "1-005",
-            "name": "Condominio Candelaria",
+            "accountId": "ae3d2531-ac31-406b-86dc-fjzwe8212h",
+            "name": "Condominio Zacatepec",
             "balance": 0
         },
         {
-            "id": 162,
-            "reference": "1-001",
-            "name": "Condominio Coyoacan",
+            "accountId": "ae3d2531-ac31-406b-86dc-a0d6272sfr234",
+            "name": "Condominio Urales",
             "balance": 0
         },
         {
-            "id": 170,
-            "reference": "1-006",
-            "name": "Condominio Obrera",
+            "accountId": "ae3d2531-ac31-406b-86dc-a0d6272c37f5",
+            "name": "Condominio Torreon",
             "balance": 0
         }
     ]
@@ -941,7 +938,7 @@ curl "https://api.compropago.com/v2/accounts/<ID>" \
 ```php
 <?php
 # ID
-$id = '170';
+$id = 'ae3d2531-ac31-406b-86dc-fjzwe8212h';
 
 # Llamada al método del API
 $sub_accounts = $client->accounts->get($id);
@@ -949,7 +946,7 @@ $sub_accounts = $client->accounts->get($id);
 
 ```ruby
 # ID
-id = '170'
+id = 'ae3d2531-ac31-406b-86dc-fjzwe8212h'
 
 # Llamada al método del API
 sub_accounts = client.accounts.get(id)
@@ -957,7 +954,7 @@ sub_accounts = client.accounts.get(id)
 
 ```python
 # ID
-id = '170'
+id = 'ae3d2531-ac31-406b-86dc-fjzwe8212h'
 
 # Llamada al método del API
 sub_accounts = client.accounts.get(id)
@@ -965,7 +962,7 @@ sub_accounts = client.accounts.get(id)
 
 ```csharp
 // ID
-string id = '170';
+string id = 'ae3d2531-ac31-406b-86dc-fjzwe8212h';
 
 // Llamada al método del API
 var sub_accounts = client.Accounts.Get(id);
@@ -973,7 +970,7 @@ var sub_accounts = client.Accounts.Get(id);
 
 ```java
 // ID
-String id = '170';
+String id = 'ae3d2531-ac31-406b-86dc-fjzwe8212h';
 
 // Llamada al método del API
 SubAccount sub_accounts = client.accounts.get(id);
@@ -995,12 +992,12 @@ SubAccount sub_accounts = client.accounts.get(id);
     "map": "b5f76f16-76dd-471b-ad85-abb1834e3acf",
     "data": [
         {
-            "id": 170,
+            "id": "ae3d2531-ac31-3292sd-23sdja-823j",
             "name": "Departamento_101",
             "clabe": "646180146400237132"
         },
         {
-            "id": 170,
+            "id": "kdsakdas-823jasd-823jsa-923kaas",
             "name": "Departamento_102",
             "clabe": "646180146400237145"
         }
