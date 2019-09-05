@@ -737,7 +737,7 @@ var account_information = new Dictionary
 {
     { 'name', 'Condominio Polanco' },
     { 'accountId', 'ae3d2531-ac31-406b-86dc-fjzwe8212h' },
-    { 'customer', {
+    { 'customers', {
         { 'id': 'ae3d2531-ac31-3292sd-23sdja-823j' },
         { 'name': 'Departamento_101' },
         { 'email': 'email@gmail.com' },
@@ -759,7 +759,7 @@ account_information.put("phone", "5555555555");
 JSONObject account_information = new JSONObject();
 account_information.put("name", "Condominio Polanco");
 account_information.put("accountId", "ae3d2531-ac31-406b-86dc-fjzwe8212h");
-account_information.put("customer", account_customer);
+account_information.put("customers", account_customer);
 
 // Llamada al método del API
 Account account = client.CreateAccount(account_information);
